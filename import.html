@@ -138,6 +138,9 @@
             loadFile(document.getElementById("import-url-textbox").value)
           );
 
+          for (let i = 0; i < data.separators.length; i++) {
+            data.separators[i] = Math.floor(data.separators[i]);
+          }
           updateDom();
         } else {
           hideLoader();
