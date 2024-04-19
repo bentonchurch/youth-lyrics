@@ -45,7 +45,7 @@
 
         let html = "";
         for (let j = 0; j < lyrics.length; j++) {
-          html += "<p>" + lyrics[j].htmlChords + "</p>";
+          html += "<p>" + lyrics[j].htmlChords + "&nbsp;</p>";
           html += "<p>" + lyrics[j].lyrics + "</p>";
         }
         document.getElementById(
@@ -53,10 +53,10 @@
         ).innerHTML = `<div class="height-fix"></div><div id="slide">${html}</div>`;
 
         let slide = document.getElementById("slide").getBoundingClientRect();
-        let slideX = Math.floor(slide.left);
-        let slideY = Math.floor(slide.top);
+        let slideX = 100 * slide.left / document.documentElement.clientWidth;
+        let slideY = 100 * slide.top / document.documentElement.clientHeight;
 
-        slidesHTML += `<div style="left:${slideX}px;top:${slideY}px" class="slide" id="slide-${i}">${html}</div>`;
+        slidesHTML += `<div style="left:${slideX}vw;top:${slideY}vh" class="slide" id="slide-${i}">${html}</div>`;
       }
 
       document.getElementById("slides").innerHTML = slidesHTML;

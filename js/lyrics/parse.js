@@ -45,7 +45,7 @@ function parseLyrics(data) {
       chordData.push({ chord: chordText, index: chordPos });
     }
 
-    let htmlChords = line[0].split(' ').join('&nbsp;').split('[ch]').join('<span class="c">').split('[/ch]').join('</span>');
+    let htmlChords = line[0].split(' ').join('&nbsp;').split('[ch]').join('<span class="c">').split('[/ch]').join('</span>&nbsp;');
 
     unparsedBody = unparsedBody.replace("[tab]", "");
     unparsedBody = unparsedBody.replace("[/tab]", "");

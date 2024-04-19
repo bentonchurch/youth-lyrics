@@ -8,7 +8,7 @@ html {
 * {
   color: #cccccc;
   font-family: Courier, monospace;
-  font-size: 32px;
+  font-size: 3vh;
   user-select: none;
   cursor: none;
 }
@@ -34,19 +34,19 @@ body {
 }
 
 .c {
-  padding: 5px;
-  margin: -5px;
+  padding: calc( 1em / 6);
+  margin: calc( -1em / 6);
   background-color: #333333;
-  border-radius: 5px;
+  border-radius: calc( 1em / 6);
   position: absolute;
 }
 
 p {
-  margin: 8px;
+  margin: calc( 8em / 30);
 }
 
 p:nth-child(odd) {
-  margin-top: 20px;
+  margin-top: calc( 2em / 3);
 }
 
 .slide {
