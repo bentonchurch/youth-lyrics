@@ -234,9 +234,14 @@ body {
   width: 100%;
 }
 
-#songs th, #songs tr {
-  background-color: #ff7f79;
+#songs th {
+  background-color: #990800;
   margin: 0px;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: 400;
+  font-size: 14px;
+  text-decoration: none;
 }
 
 #songs {
