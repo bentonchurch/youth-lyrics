@@ -42,7 +42,7 @@ input:focus {
 }
 
 /* Button */
-button, li a {
+button {
   background-color: #990800;
   border: none;
   border-radius: 5px;
@@ -52,17 +52,17 @@ button, li a {
   user-select: none;
 }
 
-button *, li a * {
+button * {
   vertical-align: text-top;
 }
 
-button:hover, li a:hover {
+button:hover {
   cursor: pointer;
   background-color: #b80900;
   /* cd2017 */
 }
 
-button[disabled], li a[disabled] {
+button[disabled] {
   background-color: #805352;
   cursor: not-allowed;
 }
@@ -108,10 +108,12 @@ body {
   width: 64px;
   height: 64px;
   transition-duration: 200ms;
+  transition: 200ms;
   -webkit-transition: 200ms;
   -moz-transition: 200ms;
   -o-transition: 200ms;
-  -ms-transition: 200ms -webkit-animation: spin 1s linear infinite;
+  -ms-transition: 200ms;
+  -webkit-animation: spin 1s linear infinite;
   -moz-animation: spin 1s linear infinite;
   -o-animation: spin 1s linear infinite;
   -ms-animation: spin 1s linear infinite;
@@ -228,10 +230,16 @@ body {
   padding: 0px;
 }
 
-#songs li {
-  margin: 25px 0px;
+#songs tr {
+  width: 100%;
 }
 
-#songs li a {
-  text-decoration: none;
+#songs th, #songs tr {
+  background-color: #ff7f79;
+  margin: 0px;
+}
+
+#songs {
+  border-spacing:0; /* Removes the cell spacing via CSS */
+  border-collapse: collapse;
 }

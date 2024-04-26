@@ -8,13 +8,12 @@ html {
 * {
   color: #cccccc;
   font-family: Courier, monospace;
-  font-size: 3vh;
+  font-size: 4vh;
   user-select: none;
-  cursor: none;
 }
 
 body {
-  background-image: url("../img/bg1.jpg");
+  background-image: url("https://downloadscdn5.freepik.com/download_vector/jpg/0/23/20/20124/20124578_6244745.jpg?token=exp=1714172083~hmac=69bcdfee0cf3c95b13abbfb741862b9b");
   background-repeat: no-repeat;
   background-position: center top;
   background-size: calc(max(calc(100vh / 1102), calc(100vw / 1906)) * 1920);

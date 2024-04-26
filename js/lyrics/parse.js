@@ -4,8 +4,13 @@
 
 import { decode } from "https://cdn.jsdelivr.net/npm/html-entities@2.5.2/+esm";
 
+/*
 function getPosition(string, subString, index) {
   return string.split(subString, index).join(subString).length;
+}
+*/
+function getPosition(string, subString, index) {
+  return string.split(subString).slice(0, index + 1).join(subString).length;
 }
 
 // Parse lyrics function
@@ -44,8 +49,18 @@ function parseLyrics(data) {
       chord = chord.replace("[/ch]", "");
       chordData.push({ chord: chordText, index: chordPos });
     }
+    //&nbsp;
+    let htmlChords = line[0].split(' ').join('&nbsp;').split('[ch]').join('<span class="c">').split('[/ch]').join('</span>');
 
-    let htmlChords = line[0].split(' ').join('&nbsp;').split('[ch]').join('<span class="c">').split('[/ch]').join('</span>&nbsp;');
+    for (let i = 0; i < htmlChords.split('<span class="c">').length; i++) {
+      let index = getPosition(htmlChords, '<span class="c">', i);
+      let chord = htmlChords.slice(index + 16);
+      chord = chord.slice(0, chord.indexOf('</span>'));
+      console.log(chord)
+      let whiteChord = "&nbsp;".repeat(chord.length);
+      htmlChords = htmlChords.slice(0, index + 23 + chord.length) + whiteChord + htmlChords.slice(index + 23 + chord.length);
+      console.log(htmlChords)
+    }
 
     unparsedBody = unparsedBody.replace("[tab]", "");
     unparsedBody = unparsedBody.replace("[/tab]", "");
@@ -76,19 +91,6 @@ function parseLyrics(data) {
   }
   headerIndexes.push(removedChars.length);
   headerIndexes.sort((a, b) => a - b);
-  let lineBreakers = [0];
-  for (let i = 0; i < headerIndexes.length - 1; i++) {
-    let portion = removedChars
-      .slice(headerIndexes[i], headerIndexes[i + 1])
-      .split("\n");
-    if (portion[portion.length - 1] !== "") {
-      portion.push("");
-    }
-
-    lineBreakers.push(
-      (portion.length - 2) / 2 + lineBreakers[lineBreakers.length - 1]
-    );
-  }
 
   for (let i = 0; i < lyrics.length; i++) {
     let data = lyrics[i];
@@ -99,7 +101,6 @@ function parseLyrics(data) {
       str += " ".repeat(data.chords[j].chord.length);
     }
     str += data.chordLyrics.slice(str.length, data.chordLyrics.length);
-    console.log(str);
   }
 
   // Create an object containing all the important song data
@@ -114,7 +115,7 @@ function parseLyrics(data) {
     //content: songData.tab_view.wiki_tab.content, // Raw body (unused)
     //applicature: songData.tab_view.applicature,  // Applicature (unused)
     lyrics: lyrics, // Return the parsed lyrics and chords
-    separators: lineBreakers,
+    separators: [0, lyrics.length],
   };
 
   // Return the song data object

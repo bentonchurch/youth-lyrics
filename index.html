@@ -22,7 +22,9 @@
   </head>
   <body>
     <h1>Home</h1>
-    <ul id="songs"></ul>
+    <button onclick="window.location.pathname='/BentonYouthLyrics/import.html'">Import</button>
+    <button onclick="localStorage['songs']='[]';window.location.reload();">Clear Cache</button>
+    <table id="songs"></table>
 
     <script>
       let arrowSymbol = `
@@ -36,7 +38,7 @@
           <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
         </svg>`;
       let songsHTML =
-        '<li><a href="import.html">Import ' + plusSymbol + "</a></li>";
+        '';
 
       let i = 0;
 
@@ -51,14 +53,11 @@
           i++;
           console.log(myUrlWithParams.href);
           songsHTML +=
-            '<li><a href="' +
+            '<tr><th><a href="' +
             myUrlWithParams +
             '" target="_blank">' +
             element.meta.name +
-            " by " +
-            element.meta.artist +
-            arrowSymbol +
-            "</a></li>";
+            "</a></th></tr>";
         });
       }
 
