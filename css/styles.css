@@ -248,3 +248,15 @@ body {
   border-spacing:0; /* Removes the cell spacing via CSS */
   border-collapse: collapse;
 }
+
+.toast {
+  background-color: #ffd8d6;
+  padding: 1px 25px;
+  border-radius: 6px 10px 10px 6px;
+  border-left: 7px solid #ccc !important;
+  border-color: #990800 !important;
+}
+
+.toast * {
+  color: #6d4d50;
+}
