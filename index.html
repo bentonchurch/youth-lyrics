@@ -48,7 +48,7 @@
 
       if (JSON.parse(localStorage.songs).length > 0) {
         JSON.parse(localStorage.songs).forEach((element) => {
-          const myUrlWithParams = new URL(window.location.origin + "/BentonYouthLyrics/slides.html");
+          const myUrlWithParams = new URL(window.location.origin + "/BentonYouth/slides.html");
           myUrlWithParams.searchParams.append("i", i);
           i++;
           console.log(myUrlWithParams.href);
