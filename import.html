@@ -19,6 +19,7 @@
     />
 
     <!-- Scripts -->
+    <script src="./js/switchPage.js"></script>
   </head>
   <body>
     <h1>Import a song</h1>
@@ -198,7 +199,7 @@
           songs.push(data);
           localStorage.setItem("songs", JSON.stringify(songs));
         }
-        window.location.pathname="YouthLyrics/index.html"
+        setPage("index.html")
       }
     </script>
     <!-- https:\/\/tabs\.ultimate-guitar\.com\/tab\/*\/*-([0-9]{1,99}) -->

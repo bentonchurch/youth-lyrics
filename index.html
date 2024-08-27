@@ -19,10 +19,11 @@
     />
 
     <!-- Scripts -->
+    <script src="./js/switchPage.js"></script>
   </head>
   <body>
     <h1>Home</h1>
-    <button onclick="window.location.pathname='/BentonYouthLyrics/import.html'">Import</button>
+    <button onclick="setPage('import.html')">Import</button>
     <button onclick="localStorage['songs']='[]';window.location.reload();">Clear Cache</button>
     <table id="songs"></table>
 
@@ -48,7 +49,8 @@
 
       if (JSON.parse(localStorage.songs).length > 0) {
         JSON.parse(localStorage.songs).forEach((element) => {
-          const myUrlWithParams = new URL(window.location.origin + "/BentonYouth/slides.html");
+          const myUrlWithParams = new URL(window.location.origin + getPageUrl("slides.html"));
+          console.log(myUrlWithParams)
           myUrlWithParams.searchParams.append("i", i);
           i++;
           console.log(myUrlWithParams.href);
