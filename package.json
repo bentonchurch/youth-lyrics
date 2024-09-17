@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "npx vite"
+    "start": "npx vite public/"
   },
   "devDependencies": {
     "vite": "^5.4.6"
