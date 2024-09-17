@@ -56,10 +56,8 @@ function parseLyrics(data) {
       let index = getPosition(htmlChords, '<span class="c">', i);
       let chord = htmlChords.slice(index + 16);
       chord = chord.slice(0, chord.indexOf('</span>'));
-      console.log(chord)
       let whiteChord = "&nbsp;".repeat(chord.length);
       htmlChords = htmlChords.slice(0, index + 23 + chord.length) + whiteChord + htmlChords.slice(index + 23 + chord.length);
-      console.log(htmlChords)
     }
 
     unparsedBody = unparsedBody.replace("[tab]", "");

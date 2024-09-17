@@ -228,20 +228,50 @@ body {
   list-style-type: none;
   margin: 0px;
   padding: 0px;
+  margin-top: 16px;
 }
 
 #songs tr {
   width: 100%;
+  display: grid;
+  grid-template-columns: 4fr 2fr 1fr;
+}
+
+#songs thead th,
+#songs tfoot th {
+  background-color: #990800;
+  color: #ffd8d6;
+  outline: none;
+}
+
+#songs thead th:nth-child(1) {
+  border-radius: 8px 0px 0px 0px;
+}
+
+#songs thead th:nth-child(3) {
+  border-radius: 0px 8px 0px 0px;
+}
+
+#songs tfoot th:nth-child(1) {
+  border-radius: 0px 0px 0px 8px;
+}
+
+#songs tfoot th:nth-child(3) {
+  border-radius: 0px 0px 8px 0px;
 }
 
 #songs th {
-  background-color: #990800;
-  margin: 0px;
-  padding: 10px;
-  border-radius: 5px;
+  background-color: #ffd8d6;
+  color: #6d4d50;
+  padding: 5px 15px;
   font-weight: 400;
   font-size: 14px;
-  text-decoration: none;
+  outline: #CEAAA9 solid 1px;
+  text-align: left;
+}
+
+#songs th * {
+  color: #6d4d50;
 }
 
 #songs {
@@ -251,12 +281,33 @@ body {
 
 .toast {
   background-color: #ffd8d6;
-  padding: 1px 25px;
+  padding: 12px 25px;
   border-radius: 6px 10px 10px 6px;
   border-left: 7px solid #ccc !important;
   border-color: #990800 !important;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 16px;
 }
 
 .toast * {
   color: #6d4d50;
+}
+
+.toast button {
+  background-color: #00000000;
+  margin: 0px;
+  padding: 0px;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.toast button:hover {
+  background-color: #99080020;
 }
