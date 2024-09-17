@@ -1,19 +1,8 @@
 {
-  "name": "benton-youth-lyrics",
-  "version": "1.0.0",
-  "type": "module",
-  "description": "A lyrics application for the Benton Street Baptist Church youth group",
-  "main": "index.html",
   "scripts": {
-    "start": "serve"
+    "start": "npx vite public/"
   },
-  "keywords": ["html", "css", "javascript"],
-  "author": "Benton Youth Tech Team (Elias Elliotson)",
-  "license": "none",
   "devDependencies": {
-    "serve": "11.2.0"
-  },
-  "dependencies": {
-    "html-entities": "2.5.2"
+    "vite": "^5.4.6"
   }
 }
