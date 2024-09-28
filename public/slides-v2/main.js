@@ -1,4 +1,5 @@
 import SwipeListener from 'https://cdn.jsdelivr.net/npm/swipe-listener@1.3.0/+esm'
+import pinchZoomJs from 'https://cdn.jsdelivr.net/npm/pinch-zoom-js@2.3.5/+esm'
 import { SlidesCanvas } from './js/SlidesCanvas.js';
 import { getCurrentSong } from './js/getCurrentSong.js';
 
@@ -44,6 +45,14 @@ slides.canvas.addEventListener('swipe', (e) => {
     transposeDown();
   }
 });
+
+// Control pinching
+touchPinch(window)
+  .on('change', function (dist, prev) {
+    const elem = document.getElementById("test");
+    elem.innerText = String(dist - prev);
+    slides.setScale(dist - prev)
+  })
 
 // Control the slides based off arrow keys
 document.addEventListener("keydown", (e) => {
