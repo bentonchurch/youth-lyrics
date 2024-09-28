@@ -47,13 +47,13 @@ slides.canvas.addEventListener('swipe', (e) => {
 });
 
 // Control pinching
-touchPinch(window)
-  .on('change', function (dist, prev) {
-    const elem = document.getElementById("test");
-    elem.innerText = String(dist - prev);
-    alert(dist + ',' + prev);
-    slides.setScale(dist - prev)
-  })
+document.addEventListener('gestureend', function(e) {
+  if (e.scale < 1.0) {
+    alert(e.scale);
+  } else if (e.scale > 1.0) {
+    alert(e.scale);
+  }
+}, false);
 
 // Control the slides based off arrow keys
 document.addEventListener("keydown", (e) => {
