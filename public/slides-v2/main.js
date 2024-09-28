@@ -51,6 +51,7 @@ touchPinch(window)
   .on('change', function (dist, prev) {
     const elem = document.getElementById("test");
     elem.innerText = String(dist - prev);
+    alert(dist + ',' + prev);
     slides.setScale(dist - prev)
   })
 
