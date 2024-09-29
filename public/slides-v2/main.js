@@ -53,13 +53,13 @@ hammer.get('pinch').set({ enable: true });
 let prevPinch = 1;
 
 hammer.on("pinchstart", function(ev) {
-  prevPinch = ev.distance;
+  prevPinch = ev.scale;
 });
 
 hammer.on("pinch", function(ev) {
-  const scaleAmount =  ((ev.distance - prevPinch) / 100) + slides.slideScale;
+  const scaleAmount =  ((ev.scale - prevPinch) / 2) + slides.slideScale;
   slides.setScale(scaleAmount);
-  prevPinch = ev.distance;
+  prevPinch = ev.scale;
 });
 
 console.log(hammer)
