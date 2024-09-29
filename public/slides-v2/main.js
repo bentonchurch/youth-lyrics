@@ -51,7 +51,7 @@ const hammer = new Hammer(document, {})
 hammer.get('pinch').set({ enable: true });
 
 hammer.on("pinch", function(ev) {
-  slides.scale = ev.scale;
+  slides.setScale(ev.scale);
 });
 
 console.log(hammer)
