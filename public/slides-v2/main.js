@@ -58,7 +58,7 @@ hammer.on("pinchstart", function(ev) {
 
 hammer.on("pinch", function(ev) {
   slides.setScale((ev.scale - prevPinch) + slides.slideScale);
-  prevPinch = ev.scale - prevPinch;
+  prevPinch = ev.scale;
 });
 
 console.log(hammer)
