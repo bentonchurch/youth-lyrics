@@ -28,6 +28,11 @@ function transposeDown() {
   slides.transpose(-1);
 }
 
+const toggleFullscreen = () => 
+    document.fullscreenElement ?
+        document.exitFullscreen() :
+        document.querySelector('body').requestFullscreen()
+
 // Control pinching and swiping
 const hammer = new Hammer(document, {})
 hammer.get('pinch').set({ enable: true });
@@ -59,6 +64,12 @@ hammer.on("swipeup", function(ev) {
 
 hammer.on("swipedown", function(ev) {
   transposeDown();
+});
+
+hammer.on("tap", function(ev) {
+  if (ev.tapCount === 2) {
+    toggleFullscreen();
+  }
 });
 
 // Control the slides based off arrow keys
