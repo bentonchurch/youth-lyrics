@@ -57,7 +57,7 @@ hammer.on("pinchstart", function(ev) {
 });
 
 hammer.on("pinch", function(ev) {
-  const scaleAmount =  (1 + ev.scale - prevPinch) * slides.slideScale;
+  const scaleAmount =  Math.sqrt(1 + ev.scale - prevPinch) * slides.slideScale;
   slides.setScale(scaleAmount);
   prevPinch = ev.scale;
 });
