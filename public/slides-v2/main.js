@@ -53,7 +53,7 @@ hammer.get('pinch').set({ enable: true });
 let prevPinch = 1;
 
 hammer.on("pinchstart", function(ev) {
-  prevPinch = ev.scale;
+  prevPinch = ev.distance;
 });
 
 hammer.on("pinch", function(ev) {
