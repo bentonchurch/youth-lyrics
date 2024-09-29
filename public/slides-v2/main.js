@@ -1,4 +1,3 @@
-import SwipeListener from 'https://cdn.jsdelivr.net/npm/swipe-listener@1.3.0/+esm'
 import Hammer from 'https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/+esm'
 import { SlidesCanvas } from './js/SlidesCanvas.js';
 import { getCurrentSong } from './js/getCurrentSong.js';
@@ -29,26 +28,10 @@ function transposeDown() {
   slides.transpose(-1);
 }
 
-// Control the slides based off screen swiping
-SwipeListener(slides.canvas);
-
-slides.canvas.addEventListener('swipe', (e) => {
-  const directions = e.detail.directions;
-
-  if (directions.right) {
-    prevSlide();
-  } else if (directions.left) {
-    nextSlide();
-  } else if (directions.top) {
-    transposeUp();
-  } else if (directions.bottom) {
-    transposeDown();
-  }
-});
-
-// Control pinching
+// Control pinching and swiping
 const hammer = new Hammer(document, {})
 hammer.get('pinch').set({ enable: true });
+hammer.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
 
 let prevPinch = 1;
 
@@ -62,7 +45,21 @@ hammer.on("pinch", function(ev) {
   prevPinch = ev.scale;
 });
 
-console.log(hammer)
+hammer.on("swiperight", function(ev) {
+  prevSlide();
+});
+
+hammer.on("swipeleft", function(ev) {
+  nextSlide();
+});
+
+hammer.on("swipeup", function(ev) {
+  transposeUp();
+});
+
+hammer.on("swipedown", function(ev) {
+  transposeDown();
+});
 
 // Control the slides based off arrow keys
 document.addEventListener("keydown", (e) => {
