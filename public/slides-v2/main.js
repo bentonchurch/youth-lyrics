@@ -50,8 +50,15 @@ slides.canvas.addEventListener('swipe', (e) => {
 const hammer = new Hammer(document, {})
 hammer.get('pinch').set({ enable: true });
 
+let prevPinch = 1;
+
+hammer.on("pinchstart", function(ev) {
+  prevPinch = ev.scale;
+});
+
 hammer.on("pinch", function(ev) {
-  slides.setScale(ev.scale);
+  slides.setScale((ev.scale - prevPinch) + slides.slideScale);
+  prevPinch = ev.scale - prevPinch;
 });
 
 console.log(hammer)
