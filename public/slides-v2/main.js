@@ -57,9 +57,9 @@ hammer.on("pinchstart", function(ev) {
 });
 
 hammer.on("pinch", function(ev) {
-  const scaleAmount =  ((ev.scale - prevPinch) / 2) + slides.slideScale;
+  const scaleAmount =  ((ev.distance - prevPinch) / 100) + slides.slideScale;
   slides.setScale(scaleAmount);
-  prevPinch = ev.scale;
+  prevPinch = ev.distance;
 });
 
 console.log(hammer)
