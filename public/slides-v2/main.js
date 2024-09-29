@@ -1,5 +1,5 @@
 import SwipeListener from 'https://cdn.jsdelivr.net/npm/swipe-listener@1.3.0/+esm'
-import pinchZoomJs from 'https://cdn.jsdelivr.net/npm/pinch-zoom-js@2.3.5/+esm'
+import Hammer from 'https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/+esm'
 import { SlidesCanvas } from './js/SlidesCanvas.js';
 import { getCurrentSong } from './js/getCurrentSong.js';
 
@@ -47,14 +47,16 @@ slides.canvas.addEventListener('swipe', (e) => {
 });
 
 // Control pinching
-document.addEventListener('gestureend', function(e) {
-  let elem = document.getElementById('test')
-  if (e.scale < 1.0) {
-    elem.innerHTML = e.scale;
-  } else if (e.scale > 1.0) {
-    elem.innerHTML = e.scale;
-  }
-}, false);
+const hammer = new Hammer(document, {})
+hammer.get('pinch').set({ enable: true });
+
+hammer.on("pinch", function(ev) {
+  const elem = document.getElementById("test")
+  elem.innerText = ev.scale;
+	//alert(ev.scale);
+});
+
+console.log(hammer)
 
 // Control the slides based off arrow keys
 document.addEventListener("keydown", (e) => {
