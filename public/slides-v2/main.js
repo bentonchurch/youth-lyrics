@@ -48,10 +48,11 @@ slides.canvas.addEventListener('swipe', (e) => {
 
 // Control pinching
 document.addEventListener('gestureend', function(e) {
+  let elem = document.getElementById('test')
   if (e.scale < 1.0) {
-    alert(e.scale);
+    elem.innerHTML = e.scale;
   } else if (e.scale > 1.0) {
-    alert(e.scale);
+    elem.innerHTML = e.scale;
   }
 }, false);
 
