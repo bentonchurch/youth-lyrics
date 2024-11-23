@@ -107,11 +107,11 @@ export class TabLoader {
    */
   static getTabMetadata(tabData) {
     return {
-      tabUrl: tabData?.store?.page?.data?.tab?.tab_url,
-      tabId: tabData?.store?.page?.data?.tab?.id,
-      tabName: tabData?.store?.page?.data?.tab?.song_name,
-      artistName: tabData?.store?.page?.data?.tab?.artist_name,
-      uploaderName: tabData?.store?.page?.data?.tab?.username,
+      url: tabData?.store?.page?.data?.tab?.tab_url,
+      id: tabData?.store?.page?.data?.tab?.id,
+      name: tabData?.store?.page?.data?.tab?.song_name,
+      artist: tabData?.store?.page?.data?.tab?.artist_name,
+      uploader: tabData?.store?.page?.data?.tab?.username,
       createdDate: Date.now()
     }
   }
