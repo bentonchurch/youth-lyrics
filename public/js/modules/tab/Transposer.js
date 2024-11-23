@@ -4,9 +4,9 @@
 class Transposer {
 
   /**
-   * Takes any chord and transposes it
+   * Transposes a specified guitar chord by a specified number of semitones
    * @param {string} chord The chord to transpose
-   * @param {number} semitones The number of semitones to transpose it by
+   * @param {number} semitones The number of semitones to transpose the chord by
    * @returns A transposed chord
    */
   static transpose(chord, semitones) {
@@ -93,14 +93,4 @@ class Transposer {
   static restructureInversion(chord1, chord2) {
     return chord1 + "/" + chord2;
   }
-}
-
-/**
- * Transposes a specified guitar chord by a specified number of semitones
- * @param {string} chord The chord to transpose
- * @param {number} semitones The number of semitones to transpose the chord by
- * @returns A transposed chord
- */
-export function transpose(chord, semitones) {
-  return Transposer.transpose(chord, semitones);
 }
