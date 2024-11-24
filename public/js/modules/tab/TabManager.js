@@ -40,8 +40,8 @@ export class TabManager {
   static getAll() {
     const tabs = this.getTabConfigurations();
 
-    for (const tabConfig in tabs) {
-      tabs[tabConfig] = new Tab(tabConfig);
+    for (const tabConfigIndex in tabs) {
+      tabs[tabConfigIndex] = new Tab(tabs[tabConfigIndex]);
     }
 
     return tabs;
