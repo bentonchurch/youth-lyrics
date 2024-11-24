@@ -54,11 +54,12 @@
  * 
  * 
  * 4. Finally, we generate one complete tab data object.  It will include the tab
- *    metadata (mentioned in step 2) as the property "meta" and the tab content as the
- *    property "content".  Additionally, we will add the property "version", which will
- *    indicate the format version of the object, and an empty array called "separators",
- *    which will eventually store markers where the content should be separated to show
- *    individual slides.
+ *    metadata (mentioned in step 2), where each property of the tab metadata will be
+ *    appended to the tab data, and the tab content as the property "content".
+ *    Additionally, we will add the property "version", which will indicate the format
+ *    version of the object, and an empty array called "separators", which will
+ *    eventually store markers where the content should be separated to show individual
+ *    slides.
  * 
 ************************************************************************************************/
 
@@ -184,7 +185,7 @@ export class TabLoader {
     const tabContentParsed = this.parseTabContent(tabContent);
 
     return {
-      meta: tabMeta,
+      ...tabMeta,
       content: tabContentParsed,
       separators: [],
       version: 1
