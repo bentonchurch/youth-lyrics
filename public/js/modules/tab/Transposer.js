@@ -1,7 +1,7 @@
 /**
  * A utility class that contains all of the functions required to transpose a chord
  */
-class Transposer {
+export class Transposer {
 
   /**
    * Transposes a specified guitar chord by a specified number of semitones
