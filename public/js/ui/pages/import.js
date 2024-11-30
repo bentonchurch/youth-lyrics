@@ -66,6 +66,11 @@ async function onUrlSubmit() {
 }
 
 urlButton.addEventListener("click", onUrlSubmit);
+urlInput.addEventListener("keydown", (event) => {
+  if (event.key === 'Enter') {
+    onUrlSubmit();
+  }
+});
 
 // Tab metadata display stuff
 function updateTabMetadata(tab) {
