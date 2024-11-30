@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="../css/core.css" />
   <link rel="stylesheet" href="../css/import.css" />
   <link rel="stylesheet" href="../css/spinner.css" />
+  <link rel="stylesheet" href="../css/tab-editor.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -24,7 +25,7 @@
 
 <body>
 
-  <!-- Heading group 1: Tab url UI -->
+  <!-- Group 1: Tab url UI -->
   <div class="tab-url-container heading" id="tab-url-heading">
     <h1>Import</h1>
 
@@ -43,7 +44,7 @@
     <span id="tab-url-spinner" class="spinner hidden"></span>
   </div>
 
-  <!-- Heading group 2: Tab information/metadata-->
+  <!-- Group 2: Tab metadata -->
   <div class="tab-metadata heading hidden" id="tab-metadata-heading">
     <h1>
       <a id="tab-name" target="blank"></a>
@@ -54,6 +55,9 @@
       <span>Uploader: <a id="tab-uploader" target="blank"></a></span>
     </p>
   </div>
+
+  <!-- Group 3: Tab editor -->
+  <div id="tab-editor"></div>
 
   <span class="material-icons-round">content_copy</span>
   <span class="material-icons-round">close</span>

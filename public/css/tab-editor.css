@@ -1,0 +1,20 @@
+.tab-editor * {
+  font-family: "Roboto Mono", "Courier New", monospace;
+  font-weight: 400;
+  margin: 0px;
+}
+
+.tab-editor p {
+  padding: 0.25em;
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tab-editor p span {
+  font-weight: 600;
+  margin: -0.125em -0.25em;
+  padding: 0.125em 0.25em;
+  background-color: #dbdbdb;
+  border-radius: 0.25em;
+}

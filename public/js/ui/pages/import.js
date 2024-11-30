@@ -1,4 +1,4 @@
-import { TabManager } from '../../modules/tab/index.js'
+import { TabManager, TabEditor } from '../../modules/tab/index.js'
 
 // Url input elements
 const urlInput = document.getElementById("tab-url-input");
@@ -55,6 +55,7 @@ async function onUrlSubmit() {
       updateTabMetadata(tab);
       hideElement(urlHeading);
       unhideElement(tabMetadataHeading);
+      new TabEditor(tab, document.getElementById("tab-editor"));
     } catch (e) {
       showError("We could not load that tab.  Please try again.")
     }
