@@ -1,12 +1,11 @@
+/********************************************/
+/****************   Common   ****************/
+/********************************************/
 * {
-  font-family: 'Poppins', sans-serif;
+  user-select: none;
 }
 
-body {
-  margin: 0px;
-}
-
-.import {
+.heading {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,14 +15,17 @@ body {
   margin: 0px auto;
 }
 
-.import .input-container {
+/*******************************************************/
+/****************   Url input heading   ****************/
+/*******************************************************/
+.tab-url-container .input-container {
   width: 100%;
   display: grid;
   grid-template-columns: auto 40px;
   gap: 4px;
 }
 
-.import .input-container * {
+.tab-url-container .input-container * {
   height: 40px;
   border: none;
   outline: none;
@@ -31,7 +33,7 @@ body {
   box-sizing: border-box;
 }
 
-.import .input-container button {
+.tab-url-container .input-container button {
   width: 40px;
   display: flex;
   justify-content: center;
@@ -40,19 +42,20 @@ body {
   color: #ffffff;
   padding: 0px;
   transition-duration: 150ms;
+  transition-property: background-color;
 }
 
-.import .input-container button:hover {
+.tab-url-container .input-container button:hover {
   background-color: #3dbaf3;
   cursor: pointer;
 }
 
-.import .input-container button span {
+.tab-url-container .input-container button span {
   width: 1em;
   height: 1em;
 }
 
-.import .input-container input {
+.tab-url-container .input-container input {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -60,9 +63,70 @@ body {
   background-color: #e4e4e4;
   padding: 0px 15px;
   transition-duration: 150ms;
+  transition-property: background-color;
 }
 
-.import .error-message {
-  font-size: 14px;
+.tab-url-container .error-message {
+  font-size: 12px;
   color: red;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.25em;
+}
+
+.tab-url-container .error-message .material-icons-round {
+  font-size: 16px;
+}
+
+.tab-url-container .spinner {
+  font-size: 48px;
+}
+
+/**********************************************************/
+/****************   Tab metadata heading   ****************/
+/**********************************************************/
+.tab-metadata h1 {
+  margin-bottom: 0px;
+  text-align: center;
+}
+
+.tab-metadata #tab-name {
+  color: #000000;
+  text-decoration: none;
+  transition-duration: 150ms;
+}
+
+.tab-metadata #tab-name:hover {
+  text-decoration: underline;
+}
+
+.tab-metadata #tab-id {
+  color: #bcbcbc;
+}
+
+.tab-metadata p {
+  margin-top: 0.5em;
+  display: flex;
+  gap: 1em;
+}
+
+.tab-metadata p,
+.tab-metadata p a {
+  color: #9b9b9b;
+  font-weight: 300;
+}
+
+@media only screen and (max-width: 800px) {
+  .tab-metadata #tab-id {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .tab-metadata p {
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+  }
 }

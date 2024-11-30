@@ -25,7 +25,9 @@ export class Tab {
     this.id = config.id;
     this.name = config.name;
     this.artist = config.artist;
+    this.artistUrl = config.artistUrl;
     this.uploader = config.uploader;
+    this.uploaderUrl = config.uploaderUrl;
     this.createdDate = config.createdDate;
   }
 
@@ -61,7 +63,9 @@ export class Tab {
       id: this.id,
       name: this.name,
       artist: this.artist,
+      artistUrl: this.artistUrl,
       uploader: this.uploader,
+      uploaderUrl: this.uploaderUrl,
       createdDate: this.createdDate,
       separators: this.separators,
       version: 1

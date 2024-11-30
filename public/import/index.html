@@ -11,6 +11,7 @@
   <title>Import | Benton Youth Lyrics</title>
 
   <!-- Styles -->
+  <link rel="stylesheet" href="../css/core.css" />
   <link rel="stylesheet" href="../css/import.css" />
   <link rel="stylesheet" href="../css/spinner.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,20 +23,40 @@
 </head>
 
 <body>
-  <div class="import">
+
+  <!-- Heading group 1: Tab url UI -->
+  <div class="tab-url-container heading" id="tab-url-heading">
     <h1>Import</h1>
+
     <div class="input-container">
       <input id="tab-url-input" type="text" placeholder="Enter a URL to import" spellcheck="false"></input>
-      <button id="">
+      <button id="tab-url-button">
         <span class="material-icons-round">arrow_forward</span>
       </button>
     </div>
-    <p class="error-message">
+
+    <p id="tab-url-error" class="error-message hidden">
       <span class="material-icons-round">error_outline</span>
-      Please enter a valid Ultimate Guitar url
+      <span id="tab-url-error-text"></span>
     </p>
-    <span class="spinner"></span>
+
+    <span id="tab-url-spinner" class="spinner hidden"></span>
+  </div>
+
+  <!-- Heading group 2: Tab information/metadata-->
+  <div class="tab-metadata heading hidden" id="tab-metadata-heading">
+    <h1>
+      <a id="tab-name" target="blank"></a>
+      <span id="tab-id"></span>
+    </h1>
+    <p>
+      <span>Artist: <a id="tab-artist" target="blank"></a></span>
+      <span>Uploader: <a id="tab-uploader" target="blank"></a></span>
+    </p>
   </div>
 </body>
+
+<!-- Scripts -->
+<script type="module" src="../js/ui/pages/import.js"></script>
 
 </html>

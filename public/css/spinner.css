@@ -1,20 +1,6 @@
 .spinner {
-  width: 48px;
-  height: 48px;
-  border: 6px solid #00a7f3;
-  border-bottom-color: transparent;
-  border-radius: 50%;
-  display: inline-block;
-  box-sizing: border-box;
-  animation: rotation 1s linear infinite;
-}
-
-@keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
+  content: url('../assets/spinner.svg');
+  background-size: 1em 1em;
+  width: 1em;
+  height: 1em;
 }

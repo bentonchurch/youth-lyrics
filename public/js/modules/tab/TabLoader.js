@@ -112,7 +112,9 @@ export class TabLoader {
       id: tabData?.store?.page?.data?.tab?.id,
       name: tabData?.store?.page?.data?.tab?.song_name,
       artist: tabData?.store?.page?.data?.tab?.artist_name,
+      artistUrl: tabData?.store?.page?.data?.tab?.artist_url,
       uploader: tabData?.store?.page?.data?.tab?.username,
+      uploaderUrl: 'https://www.ultimate-guitar.com/u/' + tabData?.store?.page?.data?.tab?.username,
       createdDate: Date.now()
     }
   }
