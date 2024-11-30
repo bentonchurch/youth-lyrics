@@ -40,16 +40,55 @@ export class TabEditor {
 
   generateSectionElement(groups) {
     const container = document.createElement("div");
+    const sidebarElement = this.generateSectionSidebar();
+    const groupsElement = document.createElement("div");
+
+    container.classList.add("section");
+    groupsElement.classList.add("section-content");
 
     for (const group of groups) {
-      container.appendChild(this.generateGroupElement(group));
+      groupsElement.appendChild(this.generateGroupElement(group));
+      groupsElement.appendChild(this.generateSectionSplitter());
     }
+
+    groupsElement.removeChild(groupsElement.lastChild);
+
+    container.append(sidebarElement, groupsElement);
 
     return container;
   }
 
+  generateSectionSidebar() {
+    const container = document.createElement("div");
+    const slider = document.createElement("span");
+    const deleteButton = document.createElement("span");
+    const cloneButton = document.createElement("span");
+
+    container.classList.add("sidebar");
+    slider.classList.add("material-icons-round");
+    deleteButton.classList.add("material-icons-round", "button");
+    cloneButton.classList.add("material-icons-round", "button");
+
+    slider.innerText = "drag_handle";
+    deleteButton.innerText = "close";
+    cloneButton.innerText = "copy";
+
+    container.append(slider, deleteButton, cloneButton);
+    return container;
+  }
+
+  generateSectionSplitter() {
+    const element = document.createElement("div");
+    element.innerHTML = '<span class="material-icons-round">content_cut</span>';
+    element.classList.add("section-splitter");
+
+    return element;
+  }
+
   generateGroupElement(lines) {
     const container = document.createElement("div");
+
+    container.classList.add("group");
 
     for (const line of lines) {
       container.appendChild(this.generateLineElement(line));
