@@ -53,13 +53,13 @@ async function onUrlSubmit() {
     try {
       tab = await TabManager.loadFromUrl(tabUrl);
       updateTabMetadata(tab);
+      hideElement(urlHeading);
       unhideElement(tabMetadataHeading);
     } catch (e) {
       showError("We could not load that tab.  Please try again.")
     }
 
     hideElement(urlInputSpinner);
-    hideElement(urlHeading);
 
     console.log(tab);
   }
