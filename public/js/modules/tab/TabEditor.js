@@ -6,7 +6,24 @@ export class TabEditor {
     this.tab = tab;
     this.element = element;
     this.element.classList.add("tab-editor");
+
+    this.render();
+  }
+
+  merge(index) {
+    const separators = this.tab.separators;
+    this.tab.separators = [...separators.slice(0, separators.indexOf(index)), ...separators.slice(separators.indexOf(index) + 1)];
     
+    this.render();
+  }
+
+  split(index) {
+    this.tab.separators.push(index);
+    this.tab.separators =
+      [...new Set(this.tab.separators)]
+      .map(e => Number(e))
+      .sort((a, b) => a - b);
+
     this.render();
   }
 
@@ -32,13 +49,22 @@ export class TabEditor {
 
   render() {
     const sections = this.getSections();
-    const elements = sections.map(e => this.generateSectionElement(e))
+    let elements = [];
+    let groupCount = 0;
+
+    for (const section of sections) {
+      elements.push(this.generateSectionElement(section, groupCount));
+      groupCount += section.length;
+      elements.push(this.generateSectionMerger(groupCount));
+    }
+
+    elements.pop();
 
     this.element.innerHTML = "";
     this.element.append(...elements);
   }
 
-  generateSectionElement(groups) {
+  generateSectionElement(groups, groupsBefore) {
     const container = document.createElement("div");
     const sidebarElement = this.generateSectionSidebar();
     const groupsElement = document.createElement("div");
@@ -46,12 +72,13 @@ export class TabEditor {
     container.classList.add("section");
     groupsElement.classList.add("section-content");
 
-    for (const group of groups) {
-      groupsElement.appendChild(this.generateGroupElement(group));
-      groupsElement.appendChild(this.generateSectionSplitter());
-    }
+    for (const group in groups) {
+      groupsElement.appendChild(this.generateGroupElement(groups[group]));
 
-    groupsElement.removeChild(groupsElement.lastChild);
+      if (group < groups.length - 1) {
+        groupsElement.appendChild(this.generateSectionSplitter(Number(group) + 1 + groupsBefore));
+      }
+    }
 
     container.append(sidebarElement, groupsElement);
 
@@ -77,10 +104,24 @@ export class TabEditor {
     return container;
   }
 
-  generateSectionSplitter() {
+  generateSectionSplitter(index) {
     const element = document.createElement("div");
-    element.innerHTML = '<span class="material-icons-round">content_cut</span>';
+    element.innerHTML = '<hr><span class="material-icons-round">content_cut</span><hr>';
     element.classList.add("section-splitter");
+    element.addEventListener("click", () => {
+      this.split(index);
+    })
+
+    return element;
+  }
+
+  generateSectionMerger(index) {
+    const element = document.createElement("div");
+    element.innerHTML = '<hr><span class="material-icons-round">arrow_upward</span><hr>';
+    element.classList.add("section-splitter", "section-merger");
+    element.addEventListener("click", () => {
+      this.merge(index);
+    })
 
     return element;
   }

@@ -4,6 +4,12 @@
   margin: 0px;
 }
 
+.tab-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .tab-editor p {
   padding: 0.25em;
   text-wrap: nowrap;
@@ -54,8 +60,8 @@
 
 .tab-editor .section-splitter {
   width: 100%;
-  border-top: 6px dashed #00a7f3;
-  height: 0px;
+  height: 32px;
+  margin: -12px 0px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,9 +69,16 @@
   transition-duration: 150ms;
 }
 
+.tab-editor .section-splitter hr {
+  border: none;
+  border-top: 6px dashed #00a7f3;
+  width: calc(50% - 16px);
+  height: 0px;
+}
+
 .tab-editor .section-splitter:hover {
   opacity: 1;
-  cursor: pointer;
+
 }
 
 .tab-editor .section-splitter span {
@@ -78,5 +91,17 @@
   align-items: center;
   border-radius: 16px;
   font-size: 20px;
-  margin-bottom: 6px;
+  cursor: pointer;
+  transition-duration: 150ms;
+}
+
+.tab-editor .section-merger {
+  margin: -24px 0px;
+  width: calc(100% - 38px);
+  margin-left: 38px;
+  z-index: 1;
+}
+
+.tab-editor .section-splitter span:hover {
+  background-color: #3dbaf3;
 }
