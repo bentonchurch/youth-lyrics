@@ -37,6 +37,9 @@
   background-color: #f1f1f1;
   border-radius: 0.5em;
   padding: 0.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .tab-editor .section .sidebar {
@@ -93,13 +96,13 @@
   font-size: 20px;
   cursor: pointer;
   transition-duration: 150ms;
+  z-index: 10;
 }
 
 .tab-editor .section-merger {
   margin: -24px 0px;
   width: calc(100% - 38px);
   margin-left: 38px;
-  z-index: 1;
 }
 
 .tab-editor .section-splitter span:hover {
