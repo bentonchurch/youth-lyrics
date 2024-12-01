@@ -1,0 +1,110 @@
+.tab-editor * {
+  font-family: "Roboto Mono", "Courier New", monospace;
+  font-weight: 400;
+  margin: 0px;
+}
+
+.tab-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tab-editor p {
+  padding: 0.25em;
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tab-editor p span {
+  font-weight: 600;
+  margin: -0.125em -0.25em;
+  padding: 0.125em 0.25em;
+  background-color: #cdcdcd;
+  border-radius: 0.25em;
+}
+
+.tab-editor .section {
+  display: flex;
+  flex-direction: row;
+  grid-template-columns: 32px 100%;
+  gap: 6px;
+}
+
+.tab-editor .section .section-content {
+  width: calc(100% - 38px - 1em);
+  background-color: #f1f1f1;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.tab-editor .section .sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.tab-editor .section .sidebar .button {
+  width: 32px;
+  height: 32px;
+  font-size: 20px;
+  background-color: #00a7f3;
+  color: white;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tab-editor .section-splitter {
+  width: 100%;
+  height: 32px;
+  margin: -12px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition-duration: 150ms;
+}
+
+.tab-editor .section-splitter hr {
+  border: none;
+  border-top: 6px dashed #00a7f3;
+  width: calc(50% - 16px);
+  height: 0px;
+}
+
+.tab-editor .section-splitter:hover {
+  opacity: 1;
+
+}
+
+.tab-editor .section-splitter span {
+  width: 32px;
+  height: 32px;
+  background-color: #00a7f3;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  font-size: 20px;
+  cursor: pointer;
+  transition-duration: 150ms;
+  z-index: 10;
+}
+
+.tab-editor .section-merger {
+  margin: -24px 0px;
+  width: calc(100% - 38px);
+  margin-left: 38px;
+}
+
+.tab-editor .section-splitter span:hover {
+  background-color: #3dbaf3;
+}

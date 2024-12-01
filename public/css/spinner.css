@@ -1,0 +1,6 @@
+.spinner {
+  content: url('../assets/spinner.svg');
+  background-size: 1em 1em;
+  width: 1em;
+  height: 1em;
+}
