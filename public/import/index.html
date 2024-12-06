@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="dark">
+
+<head>
+  <!-- Metadata -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+  <!-- Title -->
+  <title>Import | Benton Youth Lyrics</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/core.css" />
+  <link rel="stylesheet" href="../css/import.css" />
+  <link rel="stylesheet" href="../css/spinner.css" />
+  <link rel="stylesheet" href="../css/components/tab-editor.css" />
+  <link rel="stylesheet" href="../css/components/toast.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/material-icons@1.13.12/iconfont/material-icons.min.css">
+</head>
+
+<body>
+
+  <!-- Group 1: Tab url UI -->
+  <div class="tab-url-container heading" id="tab-url-heading">
+    <h1>Import</h1>
+
+    <div class="input-container">
+      <input id="tab-url-input" type="text" placeholder="Enter a URL to import" spellcheck="false" autocomplete="off"></input>
+      <button id="tab-url-button">
+        <span class="material-icons-round">arrow_forward</span>
+      </button>
+    </div>
+
+    <p id="tab-url-error" class="error-message hidden">
+      <span class="material-icons-round">error_outline</span>
+      <span id="tab-url-error-text"></span>
+    </p>
+
+    <span id="tab-url-spinner" class="spinner hidden"></span>
+  </div>
+
+  <!-- Group 2: Tab metadata -->
+  <div class="tab-metadata heading hidden" id="tab-metadata-heading">
+    <h1>
+      <a id="tab-name" target="blank"></a>
+      <span id="tab-id"></span>
+    </h1>
+    <p>
+      <span>Artist: <a id="tab-artist" target="blank"></a></span>
+      <span>Uploader: <a id="tab-uploader" target="blank"></a></span>
+    </p>
+    <span id="reimporting-song-warning" class="toast warning hidden">
+      <span class="material-icons-outlined"></span>
+      <span>Warning - you've already imported this tab!  By saving this version, you will overwrite any previously existing versions of the tab.</span>
+    </span>
+  </div>
+
+  <!-- Group 3: Tab editor -->
+  <div id="tab-editor"></div>
+
+  <!--
+    Icons that need to be used:
+
+    <span class="material-icons-round">save</span> - Save icon
+    <span class="material-icons-round">auto_awesome</span> - AI splitting icon
+    <span class="material-icons-round">undo</span> - Undo icon
+    <span class="material-icons-round">redo</span> - Redo icon
+  -->
+</body>
+
+<!-- Scripts -->
+<script type="module" src="../js/ui/pages/import.js"></script>
+
+</html>

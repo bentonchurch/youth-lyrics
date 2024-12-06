@@ -1,0 +1,164 @@
+/********************************************/
+/****************   Common   ****************/
+/********************************************/
+* {
+  user-select: none;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: min(100%, 960px);
+  padding: min(5%, 48px);
+  margin: 0px auto;
+}
+
+/*******************************************************/
+/****************   Url input heading   ****************/
+/*******************************************************/
+.tab-url-container .input-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 40px;
+  gap: 4px;
+}
+
+.tab-url-container .input-container * {
+  height: 40px;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+.tab-url-container .input-container button {
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  padding: 0px;
+  transition-duration: 150ms;
+  transition-property: background-color;
+}
+
+.tab-url-container .input-container button:hover {
+  background-color: var(--hover-color);
+  cursor: pointer;
+}
+
+.tab-url-container .input-container button span {
+  width: 1em;
+  height: 1em;
+}
+
+.tab-url-container .input-container input {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e4e4e4;
+  padding: 0px 15px;
+  transition-duration: 150ms;
+  transition-property: background-color;
+}
+
+html[color-mode="dark"] .tab-url-container .input-container input {
+  background-color: #292929;
+  color: white;
+}
+
+.tab-url-container .error-message {
+  font-size: 12px;
+  color: red;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.25em;
+}
+
+html[color-mode="dark"] .tab-url-container .error-message {
+  color: #ce0000;
+}
+
+.tab-url-container .error-message .material-icons-round {
+  font-size: 16px;
+}
+
+.tab-url-container .spinner {
+  font-size: 48px;
+  margin-top: 16px;
+}
+
+/**********************************************************/
+/****************   Tab metadata heading   ****************/
+/**********************************************************/
+.tab-metadata h1 {
+  margin-bottom: 0px;
+  text-align: center;
+}
+
+.tab-metadata #tab-name {
+  color: #000000;
+  text-decoration: none;
+  transition-duration: 150ms;
+}
+
+html[color-mode="dark"] .tab-metadata #tab-name {
+  color: #e4e4e4;
+}
+
+.tab-metadata #tab-name:hover {
+  text-decoration: underline;
+}
+
+.tab-metadata #tab-id {
+  color: #bcbcbc;
+}
+
+html[color-mode="dark"] #tab-id {
+  color: #959595;
+}
+
+.tab-metadata p {
+  margin-top: 0.5em;
+  display: flex;
+  gap: 1em;
+}
+
+.tab-metadata p,
+.tab-metadata p a {
+  color: #9b9b9b;
+  font-weight: 300;
+}
+
+html[color-mode="dark"] .tab-metadata p,
+html[color-mode="dark"] .tab-metadata p a {
+  color: #848484;
+}
+
+@media only screen and (max-width: 800px) {
+  .tab-metadata #tab-id {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .tab-metadata p {
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+  }
+}
+
+/************************************************/
+/****************   Tab editor   ****************/
+/************************************************/
+#tab-editor {
+  max-width: 1080px;
+  padding: 12px;
+  margin: 0px auto;
+}

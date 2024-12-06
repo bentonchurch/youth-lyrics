@@ -1,0 +1,13 @@
+.spinner {
+  background-size: 1em 1em;
+  width: 1em;
+  height: 1em;
+}
+
+html[color-mode="light"] .spinner {
+  content: url('../assets/spinner-light.svg');
+}
+
+html[color-mode="dark"] .spinner {
+  content: url('../assets/spinner-dark.svg');
+}
