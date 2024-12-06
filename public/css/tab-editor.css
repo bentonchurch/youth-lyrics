@@ -25,6 +25,10 @@
   border-radius: 0.25em;
 }
 
+html[color-mode="dark"] .tab-editor p span {
+  background-color: #3e3e3e;
+}
+
 .tab-editor .section {
   display: flex;
   flex-direction: row;
@@ -42,6 +46,10 @@
   justify-content: center;
 }
 
+html[color-mode="dark"] .tab-editor .section .section-content {
+  background-color: #232323;
+}
+
 .tab-editor .section .sidebar {
   display: flex;
   flex-direction: column;
@@ -53,7 +61,7 @@
   width: 32px;
   height: 32px;
   font-size: 20px;
-  background-color: #00a7f3;
+  background-color: var(--primary-color);
   color: white;
   border-radius: 100%;
   display: flex;
@@ -64,16 +72,18 @@
 }
 
 .tab-editor .section .sidebar .button:hover {
-  background-color: #3dbaf3;
+  background-color: var(--hover-color);
 }
 
-.tab-editor .section .sidebar .disabled {
+.tab-editor .section .sidebar .disabled,
+.tab-editor .section .sidebar .disabled:hover {
   background-color: #a1a1a1;
   cursor: default;
 }
 
-.tab-editor .section .sidebar .disabled:hover {
-  background-color: #a1a1a1;
+html[color-mode="dark"] .tab-editor .section .sidebar .disabled,
+html[color-mode="dark"] .tab-editor .section .sidebar .disabled:hover {
+  background-color: #5b5b5b;
 }
 
 .tab-editor .section-splitter {
@@ -91,7 +101,7 @@
 
 .tab-editor .section-splitter hr {
   border: none;
-  border-top: 6px dashed #00a7f3;
+  border-top: 6px dashed var(--primary-color);
   width: calc(50% - 16px);
   height: 0px;
 }
@@ -103,7 +113,7 @@
 .tab-editor .section-splitter span {
   width: 32px;
   height: 32px;
-  background-color: #00a7f3;
+  background-color: var(--primary-color);
   color: white;
   display: flex;
   justify-content: center;
@@ -121,7 +131,7 @@
 }
 
 .tab-editor .section-splitter span:hover {
-  background-color: #3dbaf3;
+  background-color: var(--hover-color);
 }
 
 .tab-editor .save-button {
@@ -130,7 +140,7 @@
   align-items: center;
   flex-direction: row;
   border: none;
-  background-color: #00a7f3;
+  background-color: var(--primary-color);
   height: 48px;
   color: white;
   gap: 0.5em;
@@ -142,9 +152,8 @@
   max-width: 100%;
 }
 
-
 .tab-editor .save-button:hover {
-  background-color: #3dbaf3;
+  background-color: var(--hover-color);
 }
 
 .tab-editor .save-button span:nth-child(2) {

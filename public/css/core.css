@@ -9,3 +9,17 @@ body {
 .hidden {
   display: none !important;
 }
+
+html[color-mode="light"] {
+  color: #000000;
+  background-color: #ffffff;
+  --primary-color: #00a7f3;
+  --hover-color: #3dbaf3;
+}
+
+html[color-mode="dark"] {
+  color: #e4e4e4;
+  background-color: #111111;
+  --primary-color: #0089cd;
+  --hover-color: #0073ac;
+}

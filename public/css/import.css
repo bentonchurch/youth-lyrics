@@ -38,7 +38,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #00a7f3;
+  background-color: var(--primary-color);
   color: #ffffff;
   padding: 0px;
   transition-duration: 150ms;
@@ -46,7 +46,7 @@
 }
 
 .tab-url-container .input-container button:hover {
-  background-color: #3dbaf3;
+  background-color: var(--hover-color);
   cursor: pointer;
 }
 
@@ -66,6 +66,11 @@
   transition-property: background-color;
 }
 
+html[color-mode="dark"] .tab-url-container .input-container input {
+  background-color: #292929;
+  color: white;
+}
+
 .tab-url-container .error-message {
   font-size: 12px;
   color: red;
@@ -73,6 +78,10 @@
   flex-direction: row;
   justify-content: center;
   gap: 0.25em;
+}
+
+html[color-mode="dark"] .tab-url-container .error-message {
+  color: #ce0000;
 }
 
 .tab-url-container .error-message .material-icons-round {
@@ -98,12 +107,20 @@
   transition-duration: 150ms;
 }
 
+html[color-mode="dark"] .tab-metadata #tab-name {
+  color: #e4e4e4;
+}
+
 .tab-metadata #tab-name:hover {
   text-decoration: underline;
 }
 
 .tab-metadata #tab-id {
   color: #bcbcbc;
+}
+
+html[color-mode="dark"] #tab-id {
+  color: #959595;
 }
 
 .tab-metadata p {
@@ -116,6 +133,11 @@
 .tab-metadata p a {
   color: #9b9b9b;
   font-weight: 300;
+}
+
+html[color-mode="dark"] .tab-metadata p,
+html[color-mode="dark"] .tab-metadata p a {
+  color: #848484;
 }
 
 @media only screen and (max-width: 800px) {
