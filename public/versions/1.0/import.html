@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta data -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <!-- Title -->
+    <title>Import | Benton Youth Lyrics</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Scripts -->
+    <script src="./js/switchPage.js"></script>
+  </head>
+  <body>
+    <h1>Import a song</h1>
+
+    <!-- URL input items -->
+    <div class="url-input-container">
+      <!-- URL input textbox-->
+      <label for="import-url-textbox">Song URL</label>
+      <input
+        type="text"
+        id="import-url-textbox"
+        name="import-url-textbox"
+        placeholder="Enter a URL to import"
+        spellcheck="false"
+        class="import-url-textbox"
+        oninput="verifyTextbox()"
+      />
+
+      <!-- URL input button-->
+      <label for="load-url-button">Load song</label>
+      <button
+        type="button"
+        id="load-url-button"
+        name="load-url-button"
+        class="load-url-button"
+        onclick="showLoader(); loadSong();"
+      >
+        Load
+      </button>
+      <p id="valid-url-warning" class="hidden">
+        Please enter a valid
+        <a href="https://www.ultimate-guitar.com/" target="_blank"
+          >Ultimate Guitar</a
+        >
+        url
+      </p>
+    </div>
+    <div id="content"></div>
+    <div class="center"><div id="main-loader" class="loader hidden"></div></div>
+
+    <script>
+      let parse;
+      import("./js/lyrics/parse.js").then((test) => {
+        parse = test.default;
+      });
+
+      let data;
+
+      const factors = (number) =>
+        [...Array(number + 1).keys()].filter((i) => number % i === 0);
+
+      const delay = (delayInms) => {
+        return new Promise((resolve) => setTimeout(resolve, delayInms));
+      };
+
+      // Synchronous loading function
+      function loadFile(path) {
+        const request = new XMLHttpRequest(); // Create an XMLHttpRequest
+        request.open(
+          "GET",
+          "https://corsproxy.io/?" + encodeURIComponent(path),
+          false
+        ); // Create a new synchronous GET request to the specified path
+        request.send(null); // Send the request without a body
+
+        // If the request turned out okay, return the response text
+        if (request.status === 200) {
+          return request.responseText;
+        }
+
+        // If it returned any sort of error, return null
+        return null;
+      }
+
+      function verifyTextbox() {
+        let string = document.getElementById("import-url-textbox").value;
+        let urlRegex = new RegExp(
+          "https:\/\/tabs\.ultimate-guitar\.com\/tab\/.*\/.*[0-9]*"
+        );
+        let valid = urlRegex.test(string);
+        if (!valid) {
+          document.getElementById("valid-url-warning").classList.add("shown");
+          document
+            .getElementById("valid-url-warning")
+            .classList.remove("hidden");
+        } else {
+          document.getElementById("valid-url-warning").classList.add("hidden");
+          document
+            .getElementById("valid-url-warning")
+            .classList.remove("shown");
+        }
+        return valid;
+      }
+
+      async function showLoader() {
+        document.getElementById("main-loader").classList.add("shown");
+        document.getElementById("main-loader").classList.remove("hidden");
+        return;
+      }
+
+      async function hideLoader() {
+        document.getElementById("main-loader").classList.add("hidden");
+        document.getElementById("main-loader").classList.remove("shown");
+        return;
+      }
+
+      async function destroyLoader() {
+        document.getElementById("main-loader").style.display = "none";
+        return;
+      }
+
+      async function loadSong() {
+        await delay(225);
+        if (verifyTextbox()) {
+          showLoader();
+          data = parse(
+            loadFile(document.getElementById("import-url-textbox").value)
+          );
+
+          for (let i = 0; i < data.separators.length; i++) {
+            data.separators[i] = Math.floor(data.separators[i]);
+          }
+          updateDom();
+        } else {
+          hideLoader();
+        }
+      }
+
+      async function updateDom() {
+        let previewHTML = "<section>";
+        for (let i = 0; i < data.lyrics.length; i++) {
+          if (data.separators.includes(i) && i !== 0) {
+            previewHTML += "</section><section>";
+          }
+          previewHTML +=
+            '<span id="verse-' +
+            i +
+            '"><strong>' +
+            data.lyrics[i].chordLyrics.split(" ").join("&nbsp;") +
+            "</strong><br>" +
+            data.lyrics[i].lyrics.split(" ").join("&nbsp;") +
+            "<br><hr></span>";
+        }
+        previewHTML += "</section>";
+
+        document.getElementById("content").innerHTML =
+          '<div class="meta"><h1>' +
+          data.meta.name +
+          "</h1><h4>by " +
+          data.meta.artist +
+          '</h4><div><button onclick="addSong();">Import Song</button></div></div>' +
+          '<div class="preview">' +
+          previewHTML +
+          "</div>";
+
+        for (let i = 0; i < data.lyrics.length; i++) {
+          document
+            .getElementById("verse-" + i)
+            .addEventListener("click", () => {
+              data.separators.push(i + 1);
+              data.separators.sort((a, b) => a - b);
+              data.separators = data.separators.filter(function (item, pos) {
+                return data.separators.indexOf(item) === pos;
+              });
+              updateDom();
+            });
+        }
+        destroyLoader();
+      }
+
+      function addSong() {
+        if (localStorage["songs"] === undefined) {
+          let songs = [data];
+          localStorage.setItem("songs", JSON.stringify(songs));
+        } else {
+          let songs = JSON.parse(localStorage["songs"]);
+          songs.push(data);
+          localStorage.setItem("songs", JSON.stringify(songs));
+        }
+        setPage("index.html")
+      }
+    </script>
+    <!-- https:\/\/tabs\.ultimate-guitar\.com\/tab\/*\/*-([0-9]{1,99}) -->
+  </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<body></body>
+<script type="module">
+  import { parseLyrics } from './js/lyrics/parse-new.js';
+
+  function loadFile(path) {
+    const request = new XMLHttpRequest(); // Create an XMLHttpRequest
+    request.open(
+      "GET",
+      "https://corsproxy.io/?" + encodeURIComponent(path),
+      false
+    ); // Create a new synchronous GET request to the specified path
+    request.send(null); // Send the request without a body
+
+    // If the request turned out okay, return the response text
+    if (request.status === 200) {
+      return request.responseText;
+    }
+
+    // If it returned any sort of error, return null
+    return null;
+  }
+
+  const ugData = loadFile("https://tabs.ultimate-guitar.com/tab/lauren-daigle/you-say-chords-1975479");
+
+  let data = parseLyrics(ugData);
+
+  document.body.innerHTML = data;
+</script>
+
+</html>
