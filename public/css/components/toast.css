@@ -37,6 +37,9 @@
   margin: 1em 1em;
   padding: 6px 24px 6px 12px;
   user-select: none;
+
+  float: left;
+  clear: left;
 }
 
 .toast * {
