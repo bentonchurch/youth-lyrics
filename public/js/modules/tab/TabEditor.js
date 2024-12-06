@@ -10,20 +10,21 @@ export class TabEditor {
     this.render();
   }
 
+  fixSeparators() {
+    this.tab.separators =
+      [...new Set(this.tab.separators)]
+      .map(e => Number(e))
+      .sort((a, b) => a - b);
+  }
+
   merge(index) {
     const separators = this.tab.separators;
     this.tab.separators = [...separators.slice(0, separators.indexOf(index)), ...separators.slice(separators.indexOf(index) + 1)];
-    
     this.render();
   }
 
   split(index) {
     this.tab.separators.push(index);
-    this.tab.separators =
-      [...new Set(this.tab.separators)]
-      .map(e => Number(e))
-      .sort((a, b) => a - b);
-
     this.render();
   }
 
@@ -48,25 +49,34 @@ export class TabEditor {
   }
 
   render() {
+    this.fixSeparators();
+
+    if (this.tab.content.length === 0) {
+      this.element.innerHTML = "<p>No content</p>";
+      return;
+    }
+
     const sections = this.getSections();
     let elements = [];
     let groupCount = 0;
 
-    for (const section of sections) {
-      elements.push(this.generateSectionElement(section, groupCount));
-      groupCount += section.length;
+    for (const section in sections) {
+      elements.push(this.generateSectionElement(Number(section), sections[Number(section)], groupCount));
+      groupCount += sections[Number(section)].length;
       elements.push(this.generateSectionMerger(groupCount));
     }
 
     elements.pop();
 
+    elements.push(this.generateSaveButton());
+
     this.element.innerHTML = "";
     this.element.append(...elements);
   }
 
-  generateSectionElement(groups, groupsBefore) {
+  generateSectionElement(sectionIndex, groups, groupsBefore) {
     const container = document.createElement("div");
-    const sidebarElement = this.generateSectionSidebar();
+    const sidebarElement = this.generateSectionSidebar(sectionIndex);
     const groupsElement = document.createElement("div");
 
     container.classList.add("section");
@@ -85,22 +95,19 @@ export class TabEditor {
     return container;
   }
 
-  generateSectionSidebar() {
+  generateSectionSidebar(index) {
     const container = document.createElement("div");
-    const slider = document.createElement("span");
     const deleteButton = document.createElement("span");
     const cloneButton = document.createElement("span");
 
     container.classList.add("sidebar");
-    slider.classList.add("material-icons-round");
-    deleteButton.classList.add("material-icons-round", "button");
-    cloneButton.classList.add("material-icons-round", "button");
+    deleteButton.classList.add("material-icons-round", "button", "disabled");
+    cloneButton.classList.add("material-icons-round", "button", "disabled");
 
-    slider.innerText = "drag_handle";
     deleteButton.innerText = "close";
     cloneButton.innerText = "copy";
 
-    container.append(slider, deleteButton, cloneButton);
+    container.append(deleteButton, cloneButton);
     return container;
   }
 
@@ -158,5 +165,18 @@ export class TabEditor {
     container.innerHTML = text;
 
     return container;
+  }
+
+  generateSaveButton() {
+    const button = document.createElement("button");
+    button.innerHTML = `<span class="material-icons-round">save</span><span>Save</span>`;
+    button.classList.add("save-button");
+
+    button.addEventListener("click", () => {
+      this.tab.save();
+      window.location.href = '../';
+    });
+
+    return button;
   }
 }

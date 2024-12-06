@@ -59,6 +59,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  transition-duration: 150ms;
+}
+
+.tab-editor .section .sidebar .button:hover {
+  background-color: #3dbaf3;
+}
+
+.tab-editor .section .sidebar .disabled {
+  background-color: #a1a1a1;
+  cursor: default;
+}
+
+.tab-editor .section .sidebar .disabled:hover {
+  background-color: #a1a1a1;
 }
 
 .tab-editor .section-splitter {
@@ -70,6 +85,8 @@
   align-items: center;
   opacity: 0;
   transition-duration: 150ms;
+  cursor: pointer;
+  z-index: 10;
 }
 
 .tab-editor .section-splitter hr {
@@ -81,7 +98,6 @@
 
 .tab-editor .section-splitter:hover {
   opacity: 1;
-
 }
 
 .tab-editor .section-splitter span {
@@ -96,7 +112,6 @@
   font-size: 20px;
   cursor: pointer;
   transition-duration: 150ms;
-  z-index: 10;
 }
 
 .tab-editor .section-merger {
@@ -107,4 +122,32 @@
 
 .tab-editor .section-splitter span:hover {
   background-color: #3dbaf3;
+}
+
+.tab-editor .save-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  border: none;
+  background-color: #00a7f3;
+  height: 48px;
+  color: white;
+  gap: 0.5em;
+  border-radius: 24px;
+  width: 320px;
+  margin: 0px auto;
+  cursor: pointer;
+  transition-duration: 150ms;
+  max-width: 100%;
+}
+
+
+.tab-editor .save-button:hover {
+  background-color: #3dbaf3;
+}
+
+.tab-editor .save-button span:nth-child(2) {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
 }
