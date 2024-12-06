@@ -54,7 +54,12 @@ export class TabManager {
    */
   static get(id) {
     const tabs = this.getTabConfigurations();
-    return new Tab(tabs[id]);
+
+    if (tabs[id]) {
+      return new Tab(tabs[id]);
+    }
+
+    return undefined;
   }
 
   /**

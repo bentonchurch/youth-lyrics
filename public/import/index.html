@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" color-mode="light">
+<html lang="en" color-mode="dark">
 
 <head>
   <!-- Metadata -->
@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="../css/import.css" />
   <link rel="stylesheet" href="../css/spinner.css" />
   <link rel="stylesheet" href="../css/components/tab-editor.css" />
+  <link rel="stylesheet" href="../css/components/toast.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -54,6 +55,10 @@
       <span>Artist: <a id="tab-artist" target="blank"></a></span>
       <span>Uploader: <a id="tab-uploader" target="blank"></a></span>
     </p>
+    <span id="reimporting-song-warning" class="toast warning hidden">
+      <span class="material-icons-outlined"></span>
+      <span>Warning - you've already imported this tab!  By saving this version, you will overwrite any previously existing versions.</span>
+    </span>
   </div>
 
   <!-- Group 3: Tab editor -->

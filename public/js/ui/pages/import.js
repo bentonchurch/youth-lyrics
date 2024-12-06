@@ -14,6 +14,7 @@ const tabIdElement = document.getElementById("tab-id");
 const tabArtistElement = document.getElementById("tab-artist");
 const tabUploaderElement = document.getElementById("tab-uploader");
 const tabMetadataHeading = document.getElementById("tab-metadata-heading");
+const tabImportedAlreadyWarning = document.getElementById("reimporting-song-warning");
 
 // Common
 function hideElement(element) {
@@ -55,6 +56,11 @@ async function onUrlSubmit() {
       updateTabMetadata(tab);
       hideElement(urlHeading);
       unhideElement(tabMetadataHeading);
+
+      if (TabManager.get(tab.id)) {
+        unhideElement(tabImportedAlreadyWarning);
+      }
+      
       new TabEditor(tab, document.getElementById("tab-editor"));
     } catch (e) {
       showError("We could not load that tab.  Please try again.")
