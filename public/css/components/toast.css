@@ -43,6 +43,10 @@
   color: rgb(var(--color));
 }
 
+.toast *:hover {
+  color: rgb(var(--color));
+}
+
 .toast.error .material-icons-outlined:before {
   content: "error_outline";
 }

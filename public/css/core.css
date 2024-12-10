@@ -23,3 +23,73 @@ html[color-mode="dark"] {
   --primary-color: #0089cd;
   --hover-color: #0073ac;
 }
+
+a {
+  color: var(--primary-color);
+  text-decoration: underline;
+  transition-duration: 150ms;
+}
+
+a:hover {
+  color: var(--hover-color);
+}
+
+html[color-mode="light"] table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+
+html[color-mode="light"] table tr:nth-child(odd) {
+  background-color: #ebebeb;
+}
+
+html[color-mode="light"] table tr:nth-child(even):hover {
+  background-color: #f4f4f4;
+}
+
+html[color-mode="light"] table tr:nth-child(odd):hover {
+  background-color: #dedcdc;
+}
+
+html[color-mode="light"] table tr {
+  border: 1px solid #bcbcbc;
+}
+
+
+
+html[color-mode="dark"] table tr:nth-child(even) {
+  background-color: #111111;
+}
+
+html[color-mode="dark"] table tr:nth-child(odd) {
+  background-color: #191919;
+}
+
+html[color-mode="dark"] table tr:nth-child(even):hover {
+  background-color: #222222;
+}
+
+html[color-mode="dark"] table tr:nth-child(odd):hover {
+  background-color: #282828;
+}
+
+html[color-mode="dark"] table tr {
+  border: 1px solid #3b3b3b;
+}
+
+
+
+table tr {
+  transition-duration: 50ms;
+}
+
+table {
+  border-collapse: collapse; 
+  border-spacing: 0px;
+}
+
+table th {
+  font-weight: 400;
+  font-size: 14px;
+  text-align: center;
+  padding: 8px 8px;
+}
