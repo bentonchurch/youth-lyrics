@@ -54,8 +54,6 @@ html[color-mode="light"] table tr {
   border: 1px solid #bcbcbc;
 }
 
-
-
 html[color-mode="dark"] table tr:nth-child(even) {
   background-color: #111111;
 }
@@ -75,8 +73,6 @@ html[color-mode="dark"] table tr:nth-child(odd):hover {
 html[color-mode="dark"] table tr {
   border: 1px solid #3b3b3b;
 }
-
-
 
 table tr {
   transition-duration: 50ms;
