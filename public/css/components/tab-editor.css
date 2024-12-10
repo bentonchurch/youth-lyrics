@@ -1,0 +1,162 @@
+.tab-editor * {
+  font-family: "Roboto Mono", "Courier New", monospace;
+  font-weight: 400;
+  margin: 0px;
+}
+
+.tab-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tab-editor p {
+  padding: 0.25em;
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tab-editor p span {
+  font-weight: 600;
+  margin: -0.125em -0.25em;
+  padding: 0.125em 0.25em;
+  background-color: #cdcdcd;
+  border-radius: 0.25em;
+}
+
+html[color-mode="dark"] .tab-editor p span {
+  background-color: #3e3e3e;
+}
+
+.tab-editor .section {
+  display: flex;
+  flex-direction: row;
+  grid-template-columns: 32px 100%;
+  gap: 6px;
+}
+
+.tab-editor .section .section-content {
+  width: calc(100% - 38px - 1em);
+  background-color: #f1f1f1;
+  border-radius: 0.5em;
+  padding: 0.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+html[color-mode="dark"] .tab-editor .section .section-content {
+  background-color: #232323;
+}
+
+.tab-editor .section .sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.tab-editor .section .sidebar .button {
+  width: 32px;
+  height: 32px;
+  font-size: 20px;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition-duration: 150ms;
+}
+
+.tab-editor .section .sidebar .button:hover {
+  background-color: var(--hover-color);
+}
+
+.tab-editor .section .sidebar .disabled,
+.tab-editor .section .sidebar .disabled:hover {
+  background-color: #a1a1a1;
+  cursor: default;
+}
+
+html[color-mode="dark"] .tab-editor .section .sidebar .disabled,
+html[color-mode="dark"] .tab-editor .section .sidebar .disabled:hover {
+  background-color: #5b5b5b;
+}
+
+.tab-editor .section-splitter {
+  width: 100%;
+  height: 32px;
+  margin: -12px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition-duration: 150ms;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.tab-editor .section-splitter hr {
+  border: none;
+  border-top: 6px dashed var(--primary-color);
+  width: calc(50% - 16px);
+  height: 0px;
+}
+
+.tab-editor .section-splitter:hover {
+  opacity: 1;
+}
+
+.tab-editor .section-splitter span {
+  width: 32px;
+  height: 32px;
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  font-size: 20px;
+  cursor: pointer;
+  transition-duration: 150ms;
+}
+
+.tab-editor .section-merger {
+  margin: -24px 0px;
+  width: calc(100% - 38px);
+  margin-left: 38px;
+}
+
+.tab-editor .section-splitter span:hover {
+  background-color: var(--hover-color);
+}
+
+.tab-editor .save-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  border: none;
+  background-color: var(--primary-color);
+  height: 48px;
+  color: white;
+  gap: 0.5em;
+  border-radius: 24px;
+  width: 320px;
+  margin: 0px auto;
+  cursor: pointer;
+  transition-duration: 150ms;
+  max-width: 100%;
+}
+
+.tab-editor .save-button:hover {
+  background-color: var(--hover-color);
+}
+
+.tab-editor .save-button span:nth-child(2) {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+}

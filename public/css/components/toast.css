@@ -1,0 +1,64 @@
+:root {
+  --error-color: 239, 83, 80;
+  --success-color: 76, 175, 80;
+  --warning-color: 255, 152, 0;
+  --info-color: 3, 169, 244;
+}
+
+.toast.error {
+  --color: var(--error-color);
+}
+
+.toast.info {
+  --color: var(--info-color);
+}
+
+.toast.success {
+  --color: var(--success-color);
+}
+
+.toast.warning {
+  --color: var(--warning-color);
+}
+
+.toast {
+  display: inline-flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.5em;
+
+  font-size: 14px;
+  color: rgb(var(--color));
+  min-height: 48px;
+  background-color: rgba(var(--color), 0.2);
+  border: 2px solid rgba(var(--color), 0.5);
+  border-radius: 1em;
+  margin: 1em 1em;
+  padding: 6px 24px 6px 12px;
+  user-select: none;
+}
+
+.toast * {
+  color: rgb(var(--color));
+}
+
+.toast *:hover {
+  color: rgb(var(--color));
+}
+
+.toast.error .material-icons-outlined:before {
+  content: "error_outline";
+}
+
+.toast.info .material-icons-outlined:before {
+  content: "info";
+}
+
+.toast.success .material-icons-outlined:before {
+  content: "check";
+}
+
+.toast.warning .material-icons-outlined:before {
+  content: "warning_amber";
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Meta data -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+  <!-- Title -->
+  <title>Home | Benton Youth Lyrics</title>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="./css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet" />
+
+  <!-- Scripts -->
+  <script src="./js/switchPage.js"></script>
+</head>
+
+<body>
+  <div class="toast">
+    <div><strong>Warning</strong> - page zooming on the slides is no longer supported. To adjust the size of the font,
+      use the <strong>+</strong> and <strong>-</strong> keys on your keyboard.</div>
+    <button><i class="bi bi-x"></i></button>
+  </div>
+
+  <h1>Home</h1>
+  <button onclick="setPage('import.html')">Import</button>
+  <button onclick="localStorage['songs']='[]';window.location.reload();">Delete all songs</button>
+  <table id="songs"></table>
+
+  <script>
+    let arrowSymbol = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5"/>
+          <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z"/>
+        </svg>
+      `;
+    let plusSymbol = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+        </svg>`;
+    let songsHTML =
+      '';
+
+    let i = 0;
+
+    if (localStorage.songs === undefined) {
+      localStorage.songs = "[]";
+    }
+
+    if (JSON.parse(localStorage.songs).length > 0) {
+      songsHTML += "<thead><th>Title</th><th>Artist</th><th>Size</th></thead>";
+
+      JSON.parse(localStorage.songs).forEach((element) => {
+        const myUrlWithParams = new URL(window.location.origin + getPageUrl("slides-v2/"));
+        myUrlWithParams.searchParams.append("i", i);
+        i++;
+        songsHTML +=
+          '<tr><th><a href="' +
+          myUrlWithParams +
+          '" target="_blank">' +
+          element.meta.name +
+          "</a></th><th>" + element.meta.artist + "</th><th>" +
+          (JSON.stringify(element).length / 1024).toFixed(1) +
+          " KB</th></tr>";
+      });
+
+      songsHTML += "<tfoot><th></th><th></th><th>" + (localStorage.songs.length / 1024).toFixed(1) + " KB</th></tfoot>";
+    }
+
+    document.getElementById("songs").innerHTML = songsHTML;
+  </script>
+  <script src="./js/toastButtons.js"></script>
+</body>
+
+</html>
