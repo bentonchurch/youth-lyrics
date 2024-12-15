@@ -80,7 +80,7 @@
         const request = new XMLHttpRequest(); // Create an XMLHttpRequest
         request.open(
           "GET",
-          "https://corsproxy.io/?" + encodeURIComponent(path),
+          "https://corsproxy.io/?url=" + path,
           false
         ); // Create a new synchronous GET request to the specified path
         request.send(null); // Send the request without a body
