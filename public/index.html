@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" color-mode="dark">
+<html lang="en" color-mode="light">
 
 <head>
   <!-- Meta data -->
@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="./css/core.css" />
   <link rel="stylesheet" href="./css/spinner.css" />
   <link rel="stylesheet" href="./css/components/toast.css" />
+  <link rel="stylesheet" href="./css/components/tab-table.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -31,6 +32,12 @@
     <span class="material-icons-outlined"></span>
     <span>Warning - this version is still in beta!  Please use the <a href="./old-version/">old version</a> as we continue to get this version ready for production.</span>
   </span>
+
+  <script type="module">
+    import { TabTable } from './js/modules/tab/index.js';
+    const table = new TabTable();
+    document.body.append(table.container);
+  </script>
 </body>
 
 </html>

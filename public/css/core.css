@@ -51,7 +51,7 @@ html[color-mode="light"] table tr:nth-child(odd):hover {
 }
 
 html[color-mode="light"] table tr {
-  border: 1px solid #bcbcbc;
+  border: 1px solid #d3d3d3;
 }
 
 html[color-mode="dark"] table tr:nth-child(even) {
@@ -74,18 +74,39 @@ html[color-mode="dark"] table tr {
   border: 1px solid #3b3b3b;
 }
 
-table tr {
+table tr, table thead {
   transition-duration: 50ms;
 }
 
-table {
-  border-collapse: collapse; 
-  border-spacing: 0px;
-}
-
-table th {
+table td {
   font-weight: 400;
   font-size: 14px;
   text-align: center;
-  padding: 8px 8px;
+  padding: 12px 8px;
+}
+
+table thead td {
+  background-color: var(--primary-color);
+}
+
+table thead td:first-child {
+  border-radius: 0.5em 0px 0px 0px;
+}
+
+table thead td:last-child {
+  border-radius: 0px 0.5em 0px 0px;
+}
+
+table thead * {
+  color: white;
+  font-weight: 500;
+}
+
+table thead {
+  position: sticky;
+  top: 0px;
+}
+
+table {
+  border-collapse: collapse;
 }

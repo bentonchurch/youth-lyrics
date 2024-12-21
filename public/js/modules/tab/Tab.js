@@ -46,6 +46,13 @@ export class Tab {
   }
 
   /**
+   * Gets the amount of bytes of storage the tab takes up.
+   */
+  get byteCount() {
+    return JSON.stringify(this.toConfig()).length;
+  }
+
+  /**
    * Saves the tab to the database
    */
   save() {

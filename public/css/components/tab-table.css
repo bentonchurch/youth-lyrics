@@ -1,5 +1,23 @@
-.tab-table table tr th:nth-child(2),
-.tab-table table tr th:nth-child(3),
-.tab-table table tr th:nth-child(4) {
+.tab-table table td:nth-child(2),
+.tab-table table td:nth-child(3),
+.tab-table table td:nth-child(4) {
   text-align: left;
+}
+
+@media only screen and (max-width: 780px) {
+  .tab-table table td:nth-child(5) {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 680px) {
+  .tab-table table td:nth-child(4) {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .tab-table table td:nth-child(3) {
+    display: none;
+  }
 }
