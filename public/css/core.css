@@ -109,4 +109,6 @@ table thead {
 
 table {
   border-collapse: collapse;
+  border-bottom: 3px solid var(--primary-color);
+  border-radius: 5px;
 }
