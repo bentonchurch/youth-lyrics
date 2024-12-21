@@ -21,10 +21,6 @@ export class Table {
 
     for (const tab in tabs) {
       this.addTab(tabs[tab]);
-      this.addTab(tabs[tab]);
-      this.addTab(tabs[tab]);
-      this.addTab(tabs[tab]);
-      this.addTab(tabs[tab]);
     }
 
     console.log(tabs);
