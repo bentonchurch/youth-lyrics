@@ -4,6 +4,7 @@ import { transpose } from './transpose.js';
 export class SlidesCanvas {
   app;
   background;
+  slideIndexText;
   slides = [];
   chords = [];
   glyphWidth = 67 / 112;
@@ -21,9 +22,11 @@ export class SlidesCanvas {
     this.initFonts();
     this.initBackground("../img/bg1.jpg");
     this.initSlides(songData);
+    this.initSlideIndexText();
     this.updateSlideRenderability();
     this.updateSlideScale();
     this.updateSlidePosition();
+    this.setSlide(0);
     this.slides[0].alpha = 1;
 
     // Slide updates
@@ -63,6 +66,7 @@ export class SlidesCanvas {
     slideIndex = Math.min(Math.max(slideIndex, 0), this.slides.length);
     this.currentSlide = slideIndex;
     this.updateSlideRenderability();
+    this.slideIndexText.text = `${slideIndex + 1}/${this.slides.length + 1}`;
   }
 
   initFonts() {
@@ -75,6 +79,14 @@ export class SlidesCanvas {
     });
 
     this.fontStyles.chords = this.fontStyles.lyrics;
+    
+    this.fontStyles.hud = new PIXI.TextStyle({
+      fontFamily: 'Courier',
+      fontSize: 16,
+      fontStyle: 'normal',
+      fontWeight: '400',
+      fill: '#aaaaaa'
+    });
   }
 
   initSlides(songData) {
@@ -107,6 +119,20 @@ export class SlidesCanvas {
 
     window.addEventListener("resize", updateBackground);
     updateBackground();
+  }
+
+  initSlideIndexText() {
+    this.slideIndexText = new PIXI.Text("", this.fontStyles.hud);
+    this.slideIndexText.anchor.set(1);
+    this.app.stage.addChild(this.slideIndexText);
+
+    const updateTextPosition = () => {
+      this.slideIndexText.position.x = window.innerWidth - 8;
+      this.slideIndexText.position.y = window.innerHeight - 8;
+    };
+
+    updateTextPosition();
+    window.addEventListener("resize", updateTextPosition);
   }
 
   updateChord(chord, chordText) {
