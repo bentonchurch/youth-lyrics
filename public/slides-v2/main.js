@@ -5,6 +5,7 @@ import { getCurrentSong } from './js/getCurrentSong.js';
 // Create a new slides app and add it to the DOM
 const song = getCurrentSong();
 const slides = new SlidesCanvas(song);
+let showMouse = true;
 
 document.body.appendChild(slides.canvas)
 
@@ -32,6 +33,18 @@ const toggleFullscreen = () =>
     document.fullscreenElement ?
         document.exitFullscreen() :
         document.querySelector('body').requestFullscreen()
+
+function toggleMouse() {
+  showMouse = !showMouse;
+
+  console.log(document.body.style);
+
+  if (showMouse) {
+    document.body.style.cursor = "";
+  } else {
+    document.body.style.cursor = "none";
+  }
+}
 
 // Control pinching and swiping
 const hammer = new Hammer(document, {})
@@ -83,8 +96,12 @@ document.addEventListener("keydown", (e) => {
   } else if (e.key === "ArrowDown") {
     transposeDown();
   } else if (e.key === "=") {
-    slides.setScale(slides.slideScale + 0.1)
+    slides.setScale(slides.slideScale + 0.05)
   } else if (e.key === "-") {
-    slides.setScale(slides.slideScale - 0.1)
+    slides.setScale(slides.slideScale - 0.05)
+  } else if (e.key === "f") {
+    toggleFullscreen();
+  } else if (e.key === "m") {
+    toggleMouse();
   }
 })

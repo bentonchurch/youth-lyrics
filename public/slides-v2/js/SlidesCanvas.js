@@ -3,9 +3,10 @@ import { transpose } from './transpose.js';
 
 export class SlidesCanvas {
   app;
+  background;
   slides = [];
   chords = [];
-  glyphWidth = 65 / 108;
+  glyphWidth = 67 / 112;
   fontStyles = {};
   lineSpacing = 1 / 3;
   currentSlide = 0;
@@ -18,6 +19,7 @@ export class SlidesCanvas {
     // Initialize the class
     this.app = new PIXI.Application({ background: '#232323', antialias: true, resizeTo: window });
     this.initFonts();
+    this.initBackground("../img/bg1.jpg");
     this.initSlides(songData);
     this.updateSlideRenderability();
     this.updateSlideScale();
@@ -34,6 +36,7 @@ export class SlidesCanvas {
   }
 
   setScale(scale) {
+    scale = Math.min(Math.max(scale, 0.15), 3);
     this.slideScale = scale;
     this.updateSlideScale();
     this.updateSlidePosition();
@@ -82,6 +85,28 @@ export class SlidesCanvas {
       this.slides.push(slide);
       this.app.stage.addChild(slide);
     }
+  }
+
+  initBackground(bgUrl) {
+    this.background = PIXI.Sprite.from(bgUrl);
+    this.background.anchor.set(0.5);
+    this.app.stage.addChild(this.background);
+
+    const updateBackground = () => {
+      const imageWidth = 3000;
+      const imageHeight = 2000;
+      const targetWidth = window.innerWidth;
+      const targetHeight = window.innerHeight;
+      const imageScale = Math.max(targetWidth / imageWidth, targetHeight / imageHeight);
+
+      this.background.x = targetWidth / 2;
+      this.background.y = targetHeight / 2;
+      this.background.width = imageWidth * imageScale;
+      this.background.height = imageHeight * imageScale;
+    };
+
+    window.addEventListener("resize", updateBackground);
+    updateBackground();
   }
 
   updateChord(chord, chordText) {
