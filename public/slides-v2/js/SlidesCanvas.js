@@ -14,6 +14,7 @@ export class SlidesCanvas {
   fadeSpeed = 1 / 15;
   slideScale = 0.5;
   fontSize = 96;
+  brightnessFilter;
 
   constructor(songData) {
 
@@ -26,6 +27,7 @@ export class SlidesCanvas {
     this.updateSlideRenderability();
     this.updateSlideScale();
     this.updateSlidePosition();
+    this.initBrightnessFilter();
     this.setSlide(0);
     this.slides[0].alpha = 1;
 
@@ -231,6 +233,15 @@ export class SlidesCanvas {
       slide.position.x = slideX;
       slide.position.y = slideY;
     }
+  }
+
+  initBrightnessFilter(bgOnly=false) {
+    this.brightnessFilter = new PIXI.ColorMatrixFilter();
+    (bgOnly ? this.background : this.app.stage).filters = [this.brightnessFilter];
+  }
+
+  setBrightness(amt) {
+    this.brightnessFilter.brightness(amt);
   }
 
   get canvas() {

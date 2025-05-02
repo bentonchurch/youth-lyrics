@@ -1,13 +1,16 @@
 import Hammer from 'https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/+esm'
 import { SlidesCanvas } from './js/SlidesCanvas.js';
-import { getCurrentSong } from './js/getCurrentSong.js';
+import { getCurrentSong, getBrightnessSettings } from './js/getCurrentSong.js';
 
 // Create a new slides app and add it to the DOM
 const song = getCurrentSong();
 const slides = new SlidesCanvas(song);
 let showMouse = true;
+let brightnessSettings = getBrightnessSettings();
 
 document.body.appendChild(slides.canvas)
+slides.initBrightnessFilter(brightnessSettings.bgOnly);
+slides.setBrightness(brightnessSettings.brightness);
 
 // Set the title of the window based off the song name and artis
 document.title = `${song.meta.name} by ${song.meta.artist} | Benton Youth Lyrics`
