@@ -201,6 +201,13 @@
         }
         setPage("index.html")
       }
+      
+      let params = new URLSearchParams(document.location.search);
+      
+      if (params.get("url") !== null) {
+        document.getElementById("import-url-textbox").value = params.get("url");
+        showLoader(); loadSong();
+      }
     </script>
     <!-- https:\/\/tabs\.ultimate-guitar\.com\/tab\/*\/*-([0-9]{1,99}) -->
   </body>
