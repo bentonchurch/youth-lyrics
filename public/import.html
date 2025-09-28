@@ -67,30 +67,9 @@
 
       let data;
 
-      const factors = (number) =>
-        [...Array(number + 1).keys()].filter((i) => number % i === 0);
-
-      const delay = (delayInms) => {
-        return new Promise((resolve) => setTimeout(resolve, delayInms));
-      };
-
       // Synchronous loading function
-      function loadFile(path) {
-        const request = new XMLHttpRequest(); // Create an XMLHttpRequest
-        request.open(
-          "GET",
-          "https://corsproxy.io/?url=" + path,
-          false
-        ); // Create a new synchronous GET request to the specified path
-        request.send(null); // Send the request without a body
-
-        // If the request turned out okay, return the response text
-        if (request.status === 200) {
-          return request.responseText;
-        }
-
-        // If it returned any sort of error, return null
-        return null;
+      async function loadFile(path) {
+        return await (await fetch(`https://corsproxy.io/?url=${path}`)).text();
       }
 
       function verifyTextbox() {
@@ -131,20 +110,20 @@
       }
 
       async function loadSong() {
-        await delay(225);
+        showLoader();
+        
         if (verifyTextbox()) {
-          showLoader();
           data = parse(
-            loadFile(document.getElementById("import-url-textbox").value)
+            await loadFile(document.getElementById("import-url-textbox").value)
           );
 
           for (let i = 0; i < data.separators.length; i++) {
             data.separators[i] = Math.floor(data.separators[i]);
           }
           updateDom();
-        } else {
-          hideLoader();
         }
+
+        hideLoader();
       }
 
       async function updateDom() {
@@ -205,10 +184,10 @@
       
       if (params.get("url") !== null) {
         document.getElementById("import-url-textbox").value = params.get("url");
-        showLoader(); loadSong();
+        showLoader();
+        loadSong();
       }
     </script>
-    <!-- https:\/\/tabs\.ultimate-guitar\.com\/tab\/*\/*-([0-9]{1,99}) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
