@@ -46,7 +46,7 @@
       >
         Load
       </button>
-      <p id="valid-url-warning" class="hidden">
+      <p id="valid-url-warning" class="invisible">
         Please enter a valid
         <a href="https://www.ultimate-guitar.com/" target="_blank"
           >Ultimate Guitar</a
@@ -54,11 +54,9 @@
         url
       </p>
     </div>
-    <div id="content"></div>
+    <div id="content" class="w-100"></div>
     <div class="center">
-      <div id="main-loader" class="spinner-border text-primary hidden" role="status" style="width: 2em; height: 2em; font-size: 2em">
-        <span class="visually-hidden">Loading...</span>
-      </div>
+      <div id="main-loader" class="spinner-border text-primary invisible" role="status" style="width: 2em; height: 2em; font-size: 2em"></div>
     </div>
 
     <script>
@@ -102,28 +100,28 @@
         );
         let valid = urlRegex.test(string);
         if (!valid) {
-          document.getElementById("valid-url-warning").classList.add("shown");
+          document.getElementById("valid-url-warning").classList.add("visible");
           document
             .getElementById("valid-url-warning")
-            .classList.remove("hidden");
+            .classList.remove("invisible");
         } else {
-          document.getElementById("valid-url-warning").classList.add("hidden");
+          document.getElementById("valid-url-warning").classList.add("invisible");
           document
             .getElementById("valid-url-warning")
-            .classList.remove("shown");
+            .classList.remove("visible");
         }
         return valid;
       }
 
       async function showLoader() {
-        document.getElementById("main-loader").classList.add("shown");
-        document.getElementById("main-loader").classList.remove("hidden");
+        document.getElementById("main-loader").classList.add("visible");
+        document.getElementById("main-loader").classList.remove("invisible");
         return;
       }
 
       async function hideLoader() {
-        document.getElementById("main-loader").classList.add("hidden");
-        document.getElementById("main-loader").classList.remove("shown");
+        document.getElementById("main-loader").classList.add("invisible");
+        document.getElementById("main-loader").classList.remove("visible");
         return;
       }
 
@@ -167,7 +165,7 @@
         previewHTML += "</section>";
 
         document.getElementById("content").innerHTML =
-          '<div class="meta"><h1>' +
+          '<div class="meta w-100 d-flex flex-column align-items-center"><h1>' +
           data.meta.name +
           "</h1><h4>by " +
           data.meta.artist +

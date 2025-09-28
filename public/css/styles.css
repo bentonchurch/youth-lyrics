@@ -23,26 +23,12 @@ body {
   transition: 200ms;
 }
 
-.hidden {
-  visibility: hidden;
-  opacity: 0;
-}
-
-.shown {
-  visibility: visible;
-  opacity: 1;
-}
-
 .center {
   width: 100%;
   display: flex;
   align-items: center;
   text-align: center;
   justify-content: center;
-}
-
-#content {
-  width: 100%;
 }
 
 #content .preview section {
@@ -64,39 +50,4 @@ body {
 
 #content .preview section span:hover hr {
   opacity: 1;
-}
-
-#content h1, #content h2, #content h3, #content h4, #content h5, #content h6 {
-  margin: 0px;
-}
-
-#content {
-  display: inline-flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-#content .preview {
-  width: 50%;
-}
-
-#content .meta {
-  margin-top: 32px;
-  margin-bottom: 32px;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  width: 50%;
-}
-
-#content {
-  display: inline-block;
-}
-
-#content .preview {
-  width: 100%;
-}
-
-#content .meta {
-  width: 100%;
 }
