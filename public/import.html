@@ -10,6 +10,7 @@
     <title>Import | Benton Youth Lyrics</title>
 
     <!-- Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="./css/styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,30 +22,26 @@
     <!-- Scripts -->
     <script src="./js/switchPage.js"></script>
   </head>
-  <body>
+  <body data-bs-theme="dark">
     <h1>Import a song</h1>
 
     <!-- URL input items -->
     <div class="url-input-container">
       <!-- URL input textbox-->
-      <label for="import-url-textbox">Song URL</label>
       <input
         type="text"
         id="import-url-textbox"
-        name="import-url-textbox"
         placeholder="Enter a URL to import"
         spellcheck="false"
-        class="import-url-textbox"
+        class="form-control"
         oninput="verifyTextbox()"
       />
 
       <!-- URL input button-->
-      <label for="load-url-button">Load song</label>
       <button
         type="button"
         id="load-url-button"
-        name="load-url-button"
-        class="load-url-button"
+        class="btn btn-primary load-url-button"
         onclick="showLoader(); loadSong();"
       >
         Load
@@ -58,7 +55,11 @@
       </p>
     </div>
     <div id="content"></div>
-    <div class="center"><div id="main-loader" class="loader hidden"></div></div>
+    <div class="center">
+      <div id="main-loader" class="spinner-border text-primary hidden" role="status" style="width: 2em; height: 2em; font-size: 2em">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
 
     <script>
       let parse;
@@ -149,10 +150,10 @@
       }
 
       async function updateDom() {
-        let previewHTML = "<section>";
+        let previewHTML = '<section class="card bg-light-subtle">';
         for (let i = 0; i < data.lyrics.length; i++) {
           if (data.separators.includes(i) && i !== 0) {
-            previewHTML += "</section><section>";
+            previewHTML += '</section><section class="card bg-light-subtle">';
           }
           previewHTML +=
             '<span id="verse-' +
@@ -170,7 +171,7 @@
           data.meta.name +
           "</h1><h4>by " +
           data.meta.artist +
-          '</h4><div><button onclick="addSong();">Import Song</button></div></div>' +
+          '</h4><div><button type="button" class="btn btn-primary" onclick="addSong();">Import Song</button></div></div>' +
           '<div class="preview">' +
           previewHTML +
           "</div>";
@@ -210,5 +211,6 @@
       }
     </script>
     <!-- https:\/\/tabs\.ultimate-guitar\.com\/tab\/*\/*-([0-9]{1,99}) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
