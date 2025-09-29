@@ -1,38 +1,8 @@
-/* Song input */
 body {
   padding: min(5vw, 50px);
 }
 
-.load-url-button {
-  width: 20%;
-  max-width: 200px;
-  min-width: 100px;
-  display: inline-block;
-}
-
-.url-input-container input {
-  width: calc(80% - 45px);
-  min-width: calc(100% - 245px);
-  max-width: calc(100% - 145px);
-  display: inline-block;
-}
-
-#valid-url-warning {
-  font-size: 12px;
-  margin: 5px;
-  transition: 200ms;
-}
-
-.center {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-}
-
 #content .preview section {
-  padding: 10px;
   margin: 10px;
   font-family: Courier, monospace;
 }
@@ -42,10 +12,8 @@ body {
   border: none;
   transition-duration: 200ms;
   margin: 0px;
-  padding: 2px;
-  border-radius: 100px;
   opacity: 0;
-  background-color: #0d6efd;
+  border-bottom: 4px dashed #0d6efd;
 }
 
 #content .preview section span:hover hr {

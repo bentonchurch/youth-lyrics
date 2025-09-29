@@ -1,9 +1,0 @@
-body {
-  margin: 0px;
-  overflow: hidden;
-}
-
-:root {
-  touch-action: pan-x pan-y;
-  height: 100% 
-}
