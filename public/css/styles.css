@@ -1,5 +1,10 @@
 body {
   padding: min(5vw, 50px);
+  --bs-border-radius: 2em;
+}
+
+.card {
+  --bs-card-border-radius: 0.5rem;
 }
 
 #content .preview section {
