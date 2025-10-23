@@ -5,7 +5,6 @@ import { getCurrentSong, getChordSettings, getBrightnessSettings } from './js/ge
 // Create a new slides app and add it to the DOM
 const song = getCurrentSong();
 const showChords = getChordSettings();
-console.log(showChords);
 const slides = new SlidesCanvas(song, showChords);
 let showMouse = true;
 let brightnessSettings = getBrightnessSettings();
