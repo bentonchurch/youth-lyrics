@@ -16,10 +16,12 @@ export class SlidesCanvas {
   slideScale = 0.5;
   fontSize = 96;
   brightnessFilter;
+  showChords;
 
-  constructor(songData) {
+  constructor(songData, showChords=true) {
 
     // Initialize the class
+    this.showChords = showChords;
     this.app = new PIXI.Application({ background: '#232323', antialias: true, resizeTo: window });
     this.initFonts();
     this.initBackground("../img/bg1.jpg");
@@ -180,17 +182,19 @@ export class SlidesCanvas {
       lyrics.anchor.x = 0.5;
 
       lyrics.x = 0;
-      lyrics.y = (lineIndex * (this.fontSize * (8 / 3))) + (this.fontSize * (4 / 3));
+      lyrics.y = (lineIndex * (this.fontSize * ((6 + (this.showChords * 2)) / 3))) + (this.fontSize * (4 / 3));
       slide.addChild(lyrics);
 
-      for (let chord of slideData[lineIndex].chords) {
-        // Ignore extraneous chords
-        if (chord.index > slideData[lineIndex].lyrics.length) {
-          continue;
-        }
+      if (this.showChords) {
+        for (let chord of slideData[lineIndex].chords) {
+          // Ignore extraneous chords
+          if (chord.index > slideData[lineIndex].lyrics.length) {
+            continue;
+          }
 
-        const chordDisplay = this.createChordOnSlide(chord, slide, slideData[lineIndex].lyrics);
-        chordDisplay.position.y = lineIndex * (this.fontSize * (8 / 3));
+          const chordDisplay = this.createChordOnSlide(chord, slide, slideData[lineIndex].lyrics);
+          chordDisplay.position.y = lineIndex * (this.fontSize * (8 / 3));
+        }
       }
     }
 

@@ -8,6 +8,14 @@ export function getCurrentSong() {
   return songData;
 }
 
+export function getChordSettings() {
+  const queryString = window.location.search;
+  const urlParameters = new URLSearchParams(queryString);
+  const showChords = urlParameters.get("chords") === 'false' ? false : true;
+
+  return showChords;
+}
+
 export function getBrightnessSettings() {
   const queryString = window.location.search;
   const urlParameters = new URLSearchParams(queryString);
