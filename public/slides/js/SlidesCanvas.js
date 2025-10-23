@@ -234,10 +234,11 @@ export class SlidesCanvas {
   updateSlidePosition() {
     for (let slideIndex = 0; slideIndex < this.slides.length; slideIndex++) {
       const slide = this.slides[slideIndex];
-      const slideX = window.innerWidth / 2;
+      const slideX = (window.innerWidth / 2) + (slideIndex - this.currentSlide) * this.fontSize;
       const slideY = (window.innerHeight - slide.height) / 2;
 
-      slide.position.x = slideX;
+      slide.position.x += (slideX - slide.position.x) / 8;
+      slide.position.x = Math.min(Math.max(slide.position.x, slideX - this.fontSize), slideX + this.fontSize);
       slide.position.y = slideY;
     }
   }
