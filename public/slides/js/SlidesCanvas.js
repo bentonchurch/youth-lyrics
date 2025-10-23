@@ -151,7 +151,7 @@ export class SlidesCanvas {
   createChord(chordData) {
     const chordText = new PIXI.Text(chordData.chord, this.fontStyles.chords);
 
-    chordText.position.y = (this.fontSize / 12) + (this.fontSize * 0.25);
+    chordText.position.y = (this.fontSize / 12) + (this.fontSize * 0.3);
 
     this.chords.push(chordText);
 
@@ -164,7 +164,7 @@ export class SlidesCanvas {
 
     container.addChild(chordText);
 
-    container.position.x = width(lyric.slice(0, chord.index), { family: 'Neris', size: this.fontSize });
+    container.position.x = width(lyric.slice(0, chord.index), { family: 'Neris', size: this.fontSize }) - width(lyric, { family: 'Neris', size: this.fontSize }) / 2;
 
     slide.addChild(container);
 
@@ -177,6 +177,8 @@ export class SlidesCanvas {
     for (let lineIndex = 0; lineIndex < slideData.length; lineIndex++) {
       const lyrics = new PIXI.Text(slideData[lineIndex].lyrics, this.fontStyles.lyrics);
 
+      lyrics.anchor.x = 0.5;
+
       lyrics.x = 0;
       lyrics.y = (lineIndex * (this.fontSize * (8 / 3))) + (this.fontSize * (4 / 3));
       slide.addChild(lyrics);
@@ -186,7 +188,7 @@ export class SlidesCanvas {
         if (chord.index > slideData[lineIndex].lyrics.length) {
           continue;
         }
-        
+
         const chordDisplay = this.createChordOnSlide(chord, slide, slideData[lineIndex].lyrics);
         chordDisplay.position.y = lineIndex * (this.fontSize * (8 / 3));
       }
@@ -228,7 +230,7 @@ export class SlidesCanvas {
   updateSlidePosition() {
     for (let slideIndex = 0; slideIndex < this.slides.length; slideIndex++) {
       const slide = this.slides[slideIndex];
-      const slideX = (window.innerWidth - slide.width) / 2;
+      const slideX = window.innerWidth / 2;
       const slideY = (window.innerHeight - slide.height) / 2;
 
       slide.position.x = slideX;
