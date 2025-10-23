@@ -94,7 +94,7 @@ export class SlidesCanvas {
       fontSize: 16,
       fontStyle: 'normal',
       fontWeight: '300',
-      fill: '#aaaaaa'
+      fill: '#eeeeeeaa'
     });
   }
 
