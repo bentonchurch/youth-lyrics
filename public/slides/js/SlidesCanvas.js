@@ -1,4 +1,5 @@
 import * as PIXI from 'https://cdn.jsdelivr.net/npm/pixi.js@7.4.2/+esm';
+import width from 'https://cdn.jsdelivr.net/npm/text-width@1.2.0/+esm';
 import { transpose } from './transpose.js';
 
 export class SlidesCanvas {
@@ -57,7 +58,7 @@ export class SlidesCanvas {
 
   transpose(semitones) {
     for (let chordDisplay of this.chords) {
-      let oldChord = chordDisplay.text.text;
+      let oldChord = chordDisplay.text;
       let newChord = transpose(oldChord, semitones);
 
       this.updateChord(chordDisplay, newChord);
@@ -73,20 +74,26 @@ export class SlidesCanvas {
 
   initFonts() {
     this.fontStyles.lyrics = new PIXI.TextStyle({
-      fontFamily: 'Courier',
+      fontFamily: 'Neris',
       fontSize: this.fontSize,
       fontStyle: 'normal',
-      fontWeight: '400',
+      fontWeight: '300',
       fill: '#eeeeee'
     });
 
-    this.fontStyles.chords = this.fontStyles.lyrics;
+    this.fontStyles.chords = new PIXI.TextStyle({
+      fontFamily: 'Neris',
+      fontSize: this.fontSize * 0.75,
+      fontStyle: 'normal',
+      fontWeight: '600',
+      fill: '#eeeeee'
+    });
     
     this.fontStyles.hud = new PIXI.TextStyle({
-      fontFamily: 'Courier',
+      fontFamily: 'Neris',
       fontSize: 16,
       fontStyle: 'normal',
-      fontWeight: '400',
+      fontWeight: '300',
       fill: '#aaaaaa'
     });
   }
@@ -138,37 +145,26 @@ export class SlidesCanvas {
   }
 
   updateChord(chord, chordText) {
-    chord.text.text = chordText;
-
-    chord.box.clear();
-    chord.box.beginFill('#565656');
-    chord.box.drawRoundedRect(-this.fontSize / 4, 0, (this.fontSize / 2) + (chordText.length * (this.glyphWidth * this.fontSize)), this.fontSize * (4 / 3), this.fontSize / 6);
-    chord.box.endFill();
+    chord.text = chordText;
   }
 
   createChord(chordData) {
-    const chordBox = new PIXI.Graphics();
     const chordText = new PIXI.Text(chordData.chord, this.fontStyles.chords);
 
-    chordBox.beginFill('#565656');
-    chordBox.drawRoundedRect(-this.fontSize / 4, 0, (this.fontSize / 2) + (chordData.chord.length * (this.glyphWidth * this.fontSize)), this.fontSize * (4 / 3), this.fontSize / 6);
-    chordBox.endFill();
+    chordText.position.y = (this.fontSize / 12) + (this.fontSize * 0.25);
 
-    chordText.position.y = this.fontSize / 12;
+    this.chords.push(chordText);
 
-    this.chords.push({ box: chordBox, text: chordText });
-
-    return [chordBox, chordText];
+    return chordText;
   }
 
-  createChordOnSlide(chord, slide) {
+  createChordOnSlide(chord, slide, lyric) {
     const container = new PIXI.Container();
-    const [chordBox, chordText] = this.createChord(chord);
+    const chordText = this.createChord(chord);
 
-    container.addChild(chordBox);
     container.addChild(chordText);
 
-    container.position.x = chord.index * (this.glyphWidth * this.fontSize);
+    container.position.x = width(lyric.slice(0, chord.index), { family: 'Neris', size: this.fontSize });
 
     slide.addChild(container);
 
@@ -186,7 +182,7 @@ export class SlidesCanvas {
       slide.addChild(lyrics);
 
       for (let chord of slideData[lineIndex].chords) {
-        const chordDisplay = this.createChordOnSlide(chord, slide);
+        const chordDisplay = this.createChordOnSlide(chord, slide, slideData[lineIndex].lyrics);
         chordDisplay.position.y = lineIndex * (this.fontSize * (8 / 3));
       }
     }

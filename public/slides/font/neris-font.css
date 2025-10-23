@@ -1,0 +1,81 @@
+@font-face {
+    font-family: 'Neris';
+    src: url('Neris-Black.woff2') format('woff2'),
+        url('Neris-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neris';
+    src: url('Neris-BlackItalic.woff2') format('woff2'),
+        url('Neris-BlackItalic.woff') format('woff');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neris';
+    src: url('Neris-BoldItalic.woff2') format('woff2'),
+        url('Neris-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neris';
+    src: url('Neris-Light.woff2') format('woff2'),
+        url('Neris-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neris';
+    src: url('Neris-LightItalic.woff2') format('woff2'),
+        url('Neris-LightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neris';
+    src: url('Neris-SemiBold.woff2') format('woff2'),
+        url('Neris-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neris';
+    src: url('Neris-SemiBoldItalic.woff2') format('woff2'),
+        url('Neris-SemiBoldItalic.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neris';
+    src: url('Neris-Thin.woff2') format('woff2'),
+        url('Neris-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Neris';
+    src: url('Neris-ThinItalic.woff2') format('woff2'),
+        url('Neris-ThinItalic.woff') format('woff');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
