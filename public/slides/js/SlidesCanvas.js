@@ -182,6 +182,11 @@ export class SlidesCanvas {
       slide.addChild(lyrics);
 
       for (let chord of slideData[lineIndex].chords) {
+        // Ignore extraneous chords
+        if (chord.index > slideData[lineIndex].lyrics.length) {
+          continue;
+        }
+        
         const chordDisplay = this.createChordOnSlide(chord, slide, slideData[lineIndex].lyrics);
         chordDisplay.position.y = lineIndex * (this.fontSize * (8 / 3));
       }
