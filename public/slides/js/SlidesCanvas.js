@@ -1,9 +1,11 @@
 import * as PIXI from 'https://cdn.jsdelivr.net/npm/pixi.js@7.4.2/+esm';
+import width from 'https://cdn.jsdelivr.net/npm/text-width@1.2.0/+esm';
 import { transpose } from './transpose.js';
 
 export class SlidesCanvas {
   app;
   background;
+  backgroundTint;
   slideIndexText;
   slides = [];
   chords = [];
@@ -15,28 +17,33 @@ export class SlidesCanvas {
   slideScale = 0.5;
   fontSize = 96;
   brightnessFilter;
+  showChords;
+  frame = 0;
 
-  constructor(songData) {
+  constructor(songData, showChords=true) {
 
     // Initialize the class
+    this.showChords = showChords;
     this.app = new PIXI.Application({ background: '#232323', antialias: true, resizeTo: window });
     this.initFonts();
-    this.initBackground("../img/bg1.jpg");
+    this.initBackground("../img/bg.mp4");
     this.initSlides(songData);
     this.initSlideIndexText();
     this.updateSlideRenderability();
     this.updateSlideScale();
     this.updateSlidePosition();
-    this.initBrightnessFilter();
     this.setSlide(0);
     this.slides[0].alpha = 1;
 
     // Slide updates
-    this.app.ticker.add((delta) => {
+    this.app.ticker.add((delta, t) => {
       this.updateSlideOpacity(delta);
       this.updateSlideRenderability();
       this.updateSlideScale();
       this.updateSlidePosition();
+      // If you want some RGB action...
+      // this.backgroundTint.hue(this.frame / 5);
+      this.frame++;
     })
   }
 
@@ -57,7 +64,7 @@ export class SlidesCanvas {
 
   transpose(semitones) {
     for (let chordDisplay of this.chords) {
-      let oldChord = chordDisplay.text.text;
+      let oldChord = chordDisplay.text;
       let newChord = transpose(oldChord, semitones);
 
       this.updateChord(chordDisplay, newChord);
@@ -73,22 +80,38 @@ export class SlidesCanvas {
 
   initFonts() {
     this.fontStyles.lyrics = new PIXI.TextStyle({
-      fontFamily: 'Courier',
+      fontFamily: 'Neris',
       fontSize: this.fontSize,
       fontStyle: 'normal',
-      fontWeight: '400',
-      fill: '#eeeeee'
+      fontWeight: '300',
+      fill: '#eeeeee',
+      dropShadow: { color: 0xff0000 }
     });
 
-    this.fontStyles.chords = this.fontStyles.lyrics;
+    this.fontStyles.chords = new PIXI.TextStyle({
+      fontFamily: 'Neris',
+      fontSize: this.fontSize * 0.75,
+      fontStyle: 'normal',
+      fontWeight: '600',
+      fill: '#eeeeee',
+      dropShadow: { color: 0xff0000 }
+    });
     
     this.fontStyles.hud = new PIXI.TextStyle({
-      fontFamily: 'Courier',
+      fontFamily: 'Neris',
       fontSize: 16,
       fontStyle: 'normal',
-      fontWeight: '400',
-      fill: '#aaaaaa'
+      fontWeight: '300',
+      fill: '#eeeeeeaa'
     });
+
+    this.fontStyles.lyrics.distance = 0;
+    this.fontStyles.lyrics.dropShadowAlpha = 0.5;
+    this.fontStyles.lyrics.dropShadowBlur = this.fontSize / 10;
+
+    this.fontStyles.chords.distance = 0;
+    this.fontStyles.chords.dropShadowAlpha = 0.5;
+    this.fontStyles.chords.dropShadowBlur = this.fontSize / 10;
   }
 
   initSlides(songData) {
@@ -103,15 +126,21 @@ export class SlidesCanvas {
 
   initBackground(bgUrl) {
     this.background = PIXI.Sprite.from(bgUrl);
+    this.backgroundTint = new PIXI.ColorMatrixFilter();
     this.background.anchor.set(0.5);
     this.app.stage.addChild(this.background);
+    this.background.filters = [this.backgroundTint];
+
+    if (this.background?.texture?.baseTexture?.resource?.source?.loop !== undefined) {
+      this.background.texture.baseTexture.resource.source.loop = true;
+    }
 
     const updateBackground = () => {
-      const imageWidth = 3000;
-      const imageHeight = 2000;
+      const imageWidth = 1920;
+      const imageHeight = 1080;
       const targetWidth = window.innerWidth;
       const targetHeight = window.innerHeight;
-      const imageScale = Math.max(targetWidth / imageWidth, targetHeight / imageHeight);
+      const imageScale = Math.max(targetWidth / imageWidth, targetHeight / imageHeight) * 1.25;
 
       this.background.x = targetWidth / 2;
       this.background.y = targetHeight / 2;
@@ -138,37 +167,26 @@ export class SlidesCanvas {
   }
 
   updateChord(chord, chordText) {
-    chord.text.text = chordText;
-
-    chord.box.clear();
-    chord.box.beginFill('#565656');
-    chord.box.drawRoundedRect(-this.fontSize / 4, 0, (this.fontSize / 2) + (chordText.length * (this.glyphWidth * this.fontSize)), this.fontSize * (4 / 3), this.fontSize / 6);
-    chord.box.endFill();
+    chord.text = chordText;
   }
 
   createChord(chordData) {
-    const chordBox = new PIXI.Graphics();
     const chordText = new PIXI.Text(chordData.chord, this.fontStyles.chords);
 
-    chordBox.beginFill('#565656');
-    chordBox.drawRoundedRect(-this.fontSize / 4, 0, (this.fontSize / 2) + (chordData.chord.length * (this.glyphWidth * this.fontSize)), this.fontSize * (4 / 3), this.fontSize / 6);
-    chordBox.endFill();
+    chordText.position.y = (this.fontSize / 12) + (this.fontSize * 0.3);
 
-    chordText.position.y = this.fontSize / 12;
+    this.chords.push(chordText);
 
-    this.chords.push({ box: chordBox, text: chordText });
-
-    return [chordBox, chordText];
+    return chordText;
   }
 
-  createChordOnSlide(chord, slide) {
+  createChordOnSlide(chord, slide, lyric) {
     const container = new PIXI.Container();
-    const [chordBox, chordText] = this.createChord(chord);
+    const chordText = this.createChord(chord);
 
-    container.addChild(chordBox);
     container.addChild(chordText);
 
-    container.position.x = chord.index * (this.glyphWidth * this.fontSize);
+    container.position.x = width(lyric.slice(0, chord.index), { family: 'Neris', size: this.fontSize }) - width(lyric, { family: 'Neris', size: this.fontSize }) / 2;
 
     slide.addChild(container);
 
@@ -181,13 +199,22 @@ export class SlidesCanvas {
     for (let lineIndex = 0; lineIndex < slideData.length; lineIndex++) {
       const lyrics = new PIXI.Text(slideData[lineIndex].lyrics, this.fontStyles.lyrics);
 
+      lyrics.anchor.x = 0.5;
+
       lyrics.x = 0;
-      lyrics.y = (lineIndex * (this.fontSize * (8 / 3))) + (this.fontSize * (4 / 3));
+      lyrics.y = (lineIndex * (this.fontSize * ((6 + (this.showChords * 2)) / 3))) + (this.fontSize * (4 / 3));
       slide.addChild(lyrics);
 
-      for (let chord of slideData[lineIndex].chords) {
-        const chordDisplay = this.createChordOnSlide(chord, slide);
-        chordDisplay.position.y = lineIndex * (this.fontSize * (8 / 3));
+      if (this.showChords) {
+        for (let chord of slideData[lineIndex].chords) {
+          // Ignore extraneous chords
+          if (chord.index > slideData[lineIndex].lyrics.length) {
+            continue;
+          }
+
+          const chordDisplay = this.createChordOnSlide(chord, slide, slideData[lineIndex].lyrics);
+          chordDisplay.position.y = lineIndex * (this.fontSize * (8 / 3));
+        }
       }
     }
 
@@ -227,21 +254,17 @@ export class SlidesCanvas {
   updateSlidePosition() {
     for (let slideIndex = 0; slideIndex < this.slides.length; slideIndex++) {
       const slide = this.slides[slideIndex];
-      const slideX = (window.innerWidth - slide.width) / 2;
+      const slideX = (window.innerWidth / 2) + (slideIndex - this.currentSlide) * this.fontSize / 2;
       const slideY = (window.innerHeight - slide.height) / 2;
 
-      slide.position.x = slideX;
+      slide.position.x += (slideX - slide.position.x) / 8;
+      slide.position.x = Math.min(Math.max(slide.position.x, slideX - this.fontSize), slideX + this.fontSize);
       slide.position.y = slideY;
     }
   }
 
-  initBrightnessFilter(bgOnly=false) {
-    this.brightnessFilter = new PIXI.ColorMatrixFilter();
-    (bgOnly ? this.background : this.app.stage).filters = [this.brightnessFilter];
-  }
-
   setBrightness(amt) {
-    this.brightnessFilter.brightness(amt);
+    this.backgroundTint.brightness(amt);
   }
 
   get canvas() {
