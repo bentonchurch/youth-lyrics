@@ -54,6 +54,7 @@
         const myUrlWithParams = new URL(window.location.origin + getPageUrl("slides/"));
         myUrlWithParams.searchParams.append("i", i);
         myUrlWithParams.searchParams.append("chords", true);
+        myUrlWithParams.searchParams.append("b", 0.75);
         i++;
         songsHTML +=
           '<tr><td><a href="' +

@@ -5,6 +5,7 @@ import { transpose } from './transpose.js';
 export class SlidesCanvas {
   app;
   background;
+  backgroundTint;
   slideIndexText;
   slides = [];
   chords = [];
@@ -17,6 +18,7 @@ export class SlidesCanvas {
   fontSize = 96;
   brightnessFilter;
   showChords;
+  frame = 0;
 
   constructor(songData, showChords=true) {
 
@@ -30,16 +32,18 @@ export class SlidesCanvas {
     this.updateSlideRenderability();
     this.updateSlideScale();
     this.updateSlidePosition();
-    this.initBrightnessFilter();
     this.setSlide(0);
     this.slides[0].alpha = 1;
 
     // Slide updates
-    this.app.ticker.add((delta) => {
+    this.app.ticker.add((delta, t) => {
       this.updateSlideOpacity(delta);
       this.updateSlideRenderability();
       this.updateSlideScale();
       this.updateSlidePosition();
+      // If you want some RGB action...
+      // this.backgroundTint.hue(this.frame / 5);
+      this.frame++;
     })
   }
 
@@ -122,8 +126,10 @@ export class SlidesCanvas {
 
   initBackground(bgUrl) {
     this.background = PIXI.Sprite.from(bgUrl);
+    this.backgroundTint = new PIXI.ColorMatrixFilter();
     this.background.anchor.set(0.5);
     this.app.stage.addChild(this.background);
+    this.background.filters = [this.backgroundTint];
 
     const updateBackground = () => {
       const imageWidth = 1920;
@@ -253,13 +259,8 @@ export class SlidesCanvas {
     }
   }
 
-  initBrightnessFilter(bgOnly=false) {
-    this.brightnessFilter = new PIXI.ColorMatrixFilter();
-    (bgOnly ? this.background : this.app.stage).filters = [this.brightnessFilter];
-  }
-
   setBrightness(amt) {
-    this.brightnessFilter.brightness(amt);
+    this.backgroundTint.brightness(amt);
   }
 
   get canvas() {
