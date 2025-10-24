@@ -24,7 +24,7 @@ export class SlidesCanvas {
     this.showChords = showChords;
     this.app = new PIXI.Application({ background: '#232323', antialias: true, resizeTo: window });
     this.initFonts();
-    this.initBackground("../img/bg1.jpg");
+    this.initBackground("../img/bg4.png");
     this.initSlides(songData);
     this.initSlideIndexText();
     this.updateSlideRenderability();
@@ -80,7 +80,8 @@ export class SlidesCanvas {
       fontSize: this.fontSize,
       fontStyle: 'normal',
       fontWeight: '300',
-      fill: '#eeeeee'
+      fill: '#eeeeee',
+      dropShadow: { color: 0xff0000 }
     });
 
     this.fontStyles.chords = new PIXI.TextStyle({
@@ -88,7 +89,8 @@ export class SlidesCanvas {
       fontSize: this.fontSize * 0.75,
       fontStyle: 'normal',
       fontWeight: '600',
-      fill: '#eeeeee'
+      fill: '#eeeeee',
+      dropShadow: { color: 0xff0000 }
     });
     
     this.fontStyles.hud = new PIXI.TextStyle({
@@ -98,6 +100,14 @@ export class SlidesCanvas {
       fontWeight: '300',
       fill: '#eeeeeeaa'
     });
+
+    this.fontStyles.lyrics.distance = 0;
+    this.fontStyles.lyrics.dropShadowAlpha = 0.5;
+    this.fontStyles.lyrics.dropShadowBlur = this.fontSize / 10;
+
+    this.fontStyles.chords.distance = 0;
+    this.fontStyles.chords.dropShadowAlpha = 0.5;
+    this.fontStyles.chords.dropShadowBlur = this.fontSize / 10;
   }
 
   initSlides(songData) {
@@ -116,8 +126,8 @@ export class SlidesCanvas {
     this.app.stage.addChild(this.background);
 
     const updateBackground = () => {
-      const imageWidth = 3000;
-      const imageHeight = 2000;
+      const imageWidth = 1920;
+      const imageHeight = 1080;
       const targetWidth = window.innerWidth;
       const targetHeight = window.innerHeight;
       const imageScale = Math.max(targetWidth / imageWidth, targetHeight / imageHeight);

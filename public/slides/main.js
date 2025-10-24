@@ -9,6 +9,7 @@ const slides = new SlidesCanvas(song, showChords);
 let showMouse = true;
 let brightnessSettings = getBrightnessSettings();
 
+window.slides = slides;
 document.body.appendChild(slides.canvas)
 slides.initBrightnessFilter(brightnessSettings.bgOnly);
 slides.setBrightness(brightnessSettings.brightness);
