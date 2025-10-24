@@ -26,7 +26,7 @@ export class SlidesCanvas {
     this.showChords = showChords;
     this.app = new PIXI.Application({ background: '#232323', antialias: true, resizeTo: window });
     this.initFonts();
-    this.initBackground("../img/bg4.png");
+    this.initBackground("../img/bg.mp4");
     this.initSlides(songData);
     this.initSlideIndexText();
     this.updateSlideRenderability();
@@ -131,12 +131,16 @@ export class SlidesCanvas {
     this.app.stage.addChild(this.background);
     this.background.filters = [this.backgroundTint];
 
+    if (this.background?.texture?.baseTexture?.resource?.source?.loop !== undefined) {
+      this.background.texture.baseTexture.resource.source.loop = true;
+    }
+
     const updateBackground = () => {
       const imageWidth = 1920;
       const imageHeight = 1080;
       const targetWidth = window.innerWidth;
       const targetHeight = window.innerHeight;
-      const imageScale = Math.max(targetWidth / imageWidth, targetHeight / imageHeight);
+      const imageScale = Math.max(targetWidth / imageWidth, targetHeight / imageHeight) * 1.25;
 
       this.background.x = targetWidth / 2;
       this.background.y = targetHeight / 2;
