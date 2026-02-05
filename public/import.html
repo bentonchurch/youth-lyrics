@@ -84,7 +84,7 @@
 
       // Synchronous loading function
       async function loadFile(path) {
-        return await (await fetch(`https://corsproxy.io/?url=${path}`)).text();
+        return await (await fetch(`https://api.codetabs.com/v1/proxy?quest=${path}`)).text();
       }
 
       function verifyTextbox() {
