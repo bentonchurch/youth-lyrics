@@ -129,7 +129,14 @@
       async function loadSong() {
         showLoader();
 
-        if (verifyTextbox()) {
+        if (window.name.length > 128) {
+          data = parse(window.name);
+
+          for (let i = 0; i < data.separators.length; i++) {
+            data.separators[i] = Math.floor(data.separators[i]);
+          }
+          updateDom();
+        } else if (verifyTextbox()) {
           data = parse(
             await loadFile(document.getElementById('import-url-textbox').value)
           );
@@ -203,6 +210,11 @@
 
       if (params.get('url') !== null) {
         document.getElementById('import-url-textbox').value = params.get('url');
+        showLoader();
+        loadSong();
+      }
+
+      if (window.name.length > 128) {
         showLoader();
         loadSong();
       }
