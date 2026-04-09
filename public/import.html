@@ -76,7 +76,7 @@
 
     <script>
       let parse;
-      import('./js/lyrics/parse.js').then((test) => {
+      await import('./js/lyrics/parse.js').then((test) => {
         parse = test.default;
       });
 
