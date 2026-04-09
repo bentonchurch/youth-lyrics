@@ -37,6 +37,12 @@
 
   <table id="songs" class="table table-striped border table-hover"></table>
 
+  <p>
+    You can import songs using the 
+    <a href="javascript:(function()%7B(async%20function()%20%7B%0A%20%20const%20data%20%3D%20await%20(await%20fetch(window.location)).text()%3B%0A%20%20const%20blob%20%3D%20new%20Blob(%5Bdata%5D%2C%20%7B%20type%3A%20%22text%2Fplain%22%20%7D)%3B%0A%20%20const%20formData%20%3D%20new%20FormData()%3B%0A%20%20%0A%20%20formData.append(%22file%22%2C%20blob)%3B%0A%20%20%0A%20%20const%20downloadLink%20%3D%20(await%20(await%20fetch(%22https%3A%2F%2Fcors-anywhere.herokuapp.com%2Fhttps%3A%2F%2Ftmpfile.link%2Fapi%2Fupload%22%2C%20%7B%0A%20%20%20%20method%3A%20%22POST%22%2C%0A%20%20%20%20body%3A%20formData%2C%0A%20%20%7D)).json()).downloadLink%3B%0A%0A%20%20window.location%20%3D%20%60https%3A%2F%2Fbentonchurch.github.io%2Fyouth-lyrics%2Fimport.html%3Furl%3D%24%7BdownloadLink%7D%60%3B%0A%7D())%3B%7D)()%3B">bookmarklet</a>.
+    Be aware that before it will work, you will need to go to the <a href="https://cors-anywhere.herokuapp.com/corsdemo" target="blank">CORS proxy</a> and request access.
+  </p>
+
   <script>
     let songsHTML =
       '';
