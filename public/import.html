@@ -84,7 +84,7 @@
 
       // Synchronous loading function
       async function loadFile(path) {
-        return await (await fetch(`https://whateverorigin.org/get?url=${encodeURIComponent(path)}`)).text();
+        return await (await fetch(`https://cors-anywhere.herokuapp.com/${path}`)).text();
       }
 
       function verifyTextbox() {
