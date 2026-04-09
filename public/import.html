@@ -92,7 +92,9 @@
         let urlRegex = new RegExp(
           'https:\/\/tabs\.ultimate-guitar\.com\/tab\/.*\/.*[0-9]*'
         );
-        let valid = urlRegex.test(string);
+        let urlRegex2 = /https:\/\/d6\.tfdl\.net\/public\/.*/;
+        let valid = urlRegex.test(string) || urlRegex2.test(string);
+        
         if (!valid) {
           document.getElementById('valid-url-warning').classList.add('visible');
           document
@@ -129,14 +131,7 @@
       async function loadSong() {
         showLoader();
 
-        if (window.name.length > 128) {
-          data = parse(window.name);
-
-          for (let i = 0; i < data.separators.length; i++) {
-            data.separators[i] = Math.floor(data.separators[i]);
-          }
-          updateDom();
-        } else if (verifyTextbox()) {
+        if (verifyTextbox()) {
           data = parse(
             await loadFile(document.getElementById('import-url-textbox').value)
           );
@@ -212,13 +207,6 @@
         document.getElementById('import-url-textbox').value = params.get('url');
         showLoader();
         loadSong();
-      }
-
-      if (window.name.length > 128) {
-        showLoader();
-        setTimeout(() => {
-          loadSong();
-        }, 1000);
       }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
