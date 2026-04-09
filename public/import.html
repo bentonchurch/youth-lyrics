@@ -76,7 +76,7 @@
 
     <script>
       let parse;
-      await import('./js/lyrics/parse.js').then((test) => {
+      import('./js/lyrics/parse.js').then((test) => {
         parse = test.default;
       });
 
@@ -204,9 +204,11 @@
       let params = new URLSearchParams(document.location.search);
 
       if (params.get('url') !== null) {
-        document.getElementById('import-url-textbox').value = params.get('url');
-        showLoader();
-        loadSong();
+        setTimeout(() => {
+          document.getElementById('import-url-textbox').value = params.get('url');
+          showLoader();
+          loadSong();
+        }, 1000);
       }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
