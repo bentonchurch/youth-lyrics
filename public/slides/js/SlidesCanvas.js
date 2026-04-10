@@ -80,28 +80,28 @@ export class SlidesCanvas {
 
   initFonts() {
     this.fontStyles.lyrics = new PIXI.TextStyle({
-      fontFamily: 'Neris',
+      fontFamily: 'Figtree',
       fontSize: this.fontSize,
       fontStyle: 'normal',
-      fontWeight: '300',
+      fontWeight: 'bold',
       fill: '#eeeeee',
       dropShadow: { color: 0xff0000 }
     });
 
     this.fontStyles.chords = new PIXI.TextStyle({
-      fontFamily: 'Neris',
+      fontFamily: 'Figtree',
       fontSize: this.fontSize * 0.75,
       fontStyle: 'normal',
-      fontWeight: '600',
+      fontWeight: '900',
       fill: '#eeeeee',
       dropShadow: { color: 0xff0000 }
     });
     
     this.fontStyles.hud = new PIXI.TextStyle({
-      fontFamily: 'Neris',
+      fontFamily: 'Figtree',
       fontSize: 16,
       fontStyle: 'normal',
-      fontWeight: '300',
+      fontWeight: 'bold',
       fill: '#eeeeeeaa'
     });
 
@@ -186,7 +186,7 @@ export class SlidesCanvas {
 
     container.addChild(chordText);
 
-    container.position.x = width(lyric.slice(0, chord.index), { family: 'Neris', size: this.fontSize }) - width(lyric, { family: 'Neris', size: this.fontSize }) / 2;
+    container.position.x = width(lyric.slice(0, chord.index), { family: 'Figtree', size: this.fontSize, weight: 'bold' }) - width(lyric, { family: 'Figtree', size: this.fontSize, weight: 'bold' }) / 2;
 
     slide.addChild(container);
 
